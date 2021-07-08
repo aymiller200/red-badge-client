@@ -1,0 +1,47 @@
+.landing {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    width: 98% !important;
+    height: max-content;
+    margin-top: 30px !important;
+    background-image: url("https://images.unsplash.com/photo-1508854710579-5cecc3a9ff17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80");
+   background-position-y:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.title {
+    font-family: "Big Shoulders Display", cursive;
+    font-size: 50px;
+    font-weight: bolder;
+    margin-bottom: 0px !important;
+}
+.van {
+    display: inline;
+    margin-top: 60px;
+    margin-left: 10px;
+    padding: 0px;
+    border-bottom: 1px solid black;
+}
+
+.text-card {
+    display: flex;
+    align-content: center;
+    text-align: center;
+    line-height: 3vh;
+    margin: 40px;
+    margin-top: 1%;
+    padding: 10px;
+}
+
+.auth {
+    display: flex;
+    padding: 20px;
+    margin-top: 5%;
+    margin: 2%;
+
+    .auth-card {
+        flex-direction: column;
+    }
+}

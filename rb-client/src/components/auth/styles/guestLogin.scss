@@ -1,0 +1,23 @@
+.guest-login {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    justify-content: space-around;
+    background-color: rgba(249, 249, 249, 0.95) !important;
+    padding: 30px;
+
+}
+
+.card-title{
+    font-family:'Big Shoulders Display', sans-serif !important;
+    letter-spacing: 1.5px;
+    margin-bottom: 0px;
+    
+}
+.submit-button {
+    display: flex;
+    align-self: center;
+    width: 40%;
+    margin: 10px !important;
+    opacity: 0.85;
+}

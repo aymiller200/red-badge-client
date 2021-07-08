@@ -1,0 +1,46 @@
+.app-bar{
+    background: transparent !important;
+    box-shadow: none !important;
+
+.menu-button{
+    display: flex;
+    align-self: flex-end ;
+    margin: 40px !important;
+    
+}
+}
+
+.drawer{
+    text-align: center;
+    height: 100%; 
+    background-image: url("https://images.unsplash.com/photo-1565168600545-75cf664d89c2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1317&q=80");
+    
+    opacity: 0.8;
+    background-position:82%;
+
+    h3{
+        font-family: 'Big Shoulders Display', sans-serif;
+        text-align: center;
+        font-size: xx-large;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    h4{
+        font-family: 'Big Shoulders Display', sans-serif;
+        text-align: center;
+        font-size: larger;
+        font-weight:bolder;
+        letter-spacing: 1.2px;
+        cursor: pointer;
+        
+        
+        &:hover{
+           text-decoration: underline;
+           letter-spacing: 2px;
+           transition: 0.2s ease-in-out ;
+
+        }
+    }
+    
+}
