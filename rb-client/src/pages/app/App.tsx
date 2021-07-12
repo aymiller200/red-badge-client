@@ -34,21 +34,33 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({ token: newToken })
   }
 
-  updateHostToken = (hostToken: string) => {
-    console.log(hostToken)
-    this.setState({ hostToken: hostToken })
-  }
-
+  
   setGuestUser = (user: string) => {
     console.log(user)
     this.setState({guestUser: user})
     localStorage.setItem('guest-user', user)
+  }
+  
+  updateHostToken = (hostToken: string) => {
+    console.log(hostToken)
+    this.setState({ hostToken: hostToken })
   }
 
   setHostUser = (hUser:string) => {
     console.log(hUser)
     this.setState({hostUser: hUser})
     localStorage.setItem('host-user', hUser)
+  }
+
+  guestLogout = () => {
+    localStorage.clear()
+    this.setState({guestUser: '', token: ''})
+  }
+
+  hostLogout = () => {
+    localStorage.clear()
+    this.setState({hostUser: '', hostToken: ''})
+
   }
 
   protectedViews() {
@@ -89,7 +101,7 @@ class App extends React.Component<AppProps, AppState> {
           guestUser={this.state.guestUser}
           setHostUser={this.setHostUser}
           hostUser={this.state.hostUser}
-
+         
          />
       )
     }
@@ -108,6 +120,9 @@ class App extends React.Component<AppProps, AppState> {
           updateToken={this.updateToken}
           updateHostToken={this.updateHostToken}
           setGuestUser={this.setGuestUser}
+          hostLogout={this.hostLogout}
+          guestLogout={this.guestLogout}
+
 
         />
         {this.state.token || localStorage.getItem('guest-user') ? this.protectedViews() : this.hostViews()}

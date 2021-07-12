@@ -16,6 +16,10 @@ interface NavProps{
     updateHostToken(hostToken: string): void
     setGuestUser(user: string): void
     setHostUser(hUser:string): void
+    guestLogout(): void
+    hostLogout():void
+    
+   
 }
 
 class NavBar extends React.Component<NavProps> {
@@ -50,7 +54,8 @@ class NavBar extends React.Component<NavProps> {
                                 hostToken={this.props.token} 
                                 hostUser={this.props.hostUser}
                                 updateHostToken={this.props.updateHostToken}
-                                setHostUser={this.props.setHostUser} />
+                                setHostUser={this.props.setHostUser}
+                                />
                             </ListItemText>
                         </ListItem>
                         <ListItem>
@@ -60,6 +65,7 @@ class NavBar extends React.Component<NavProps> {
                                 guestUser={this.props.guestUser}
                                 updateToken={this.props.updateToken}
                                 setGuestUser={this.props.setGuestUser}
+                                
                                 />
                             </ListItemText>
                         </ListItem>
@@ -83,6 +89,11 @@ class NavBar extends React.Component<NavProps> {
                         <ListItem>
                             <ListItemText className="li" >
                                 <h4>Find Hosts</h4>
+                            </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText className="li" >
+                                <h4 onClick={this.props.guestLogout}>Logout</h4>
                             </ListItemText>
                         </ListItem>
                         </List>
@@ -118,6 +129,7 @@ class NavBar extends React.Component<NavProps> {
                                 guestUser={this.props.guestUser} 
                                 setGuestUser={this.props.setGuestUser}
                                 updateToken={this.props.updateToken}
+                           
                                 />
                             </ListItemText>
                         </ListItem>
@@ -141,6 +153,11 @@ class NavBar extends React.Component<NavProps> {
                         <ListItem>
                             <ListItemText className="li" >
                                 <h4>Find other Hosts</h4>
+                            </ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText className="li" >
+                                <h4 onClick={this.props.hostLogout}>Logout</h4>
                             </ListItemText>
                         </ListItem>
                         </List>
