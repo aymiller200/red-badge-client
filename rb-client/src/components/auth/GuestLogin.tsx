@@ -9,8 +9,12 @@ import CloseIcon from '@material-ui/icons/Close'
 interface GuestProps {
     token: string | null;
     guestUser: string | null
+    bandName: string | null
+    guestId: number | null
+    setGuestId(id:number): void
     updateToken(newToken: string): void
     setGuestUser(user: string): void
+    setBandName(band: string): void
 }
 
 class GuestLogin extends React.Component<GuestProps> {
@@ -22,7 +26,7 @@ class GuestLogin extends React.Component<GuestProps> {
         open: false,
     }
 
-    handleSubmit = (e: any) => {
+    handleSubmit = (e:any) => {
         e.preventDefault()
         fetch('http://localhost:3535/guest/login', {
             method: "POST",
@@ -39,6 +43,8 @@ class GuestLogin extends React.Component<GuestProps> {
                 this.setState({ login: json })
                 this.props.updateToken(json.token)
                 this.props.setGuestUser(json.guest.username)
+                this.props.setBandName(json.guest.bandName)
+                this.props.setGuestId(json.guest.id)
                 console.log(json)
             })
             .catch(err => {
@@ -50,6 +56,9 @@ class GuestLogin extends React.Component<GuestProps> {
             password: '',
         })
     }
+
+   
+
 
     render() {
         return (

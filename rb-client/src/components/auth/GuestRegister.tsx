@@ -1,23 +1,16 @@
 import React from "react";
 import { Dialog, TextField, DialogTitle, Grid, Button, DialogActions, FormControl } from "@material-ui/core";
 
-// interface IState {
-//     email: string,
-//     username: string,
-//     firstName: string,
-//     lastName: string,
-//     bandName: string,
-//     password: string,
-//     token: string,
-//     register: object,
-//     open: boolean
-// }
 
 interface GuestRegProps {
     token: string | null
     guestUser: string | null
+    bandName: string | null
+    guestId: number | null
+    setGuestId(id: number): void
     updateToken(newToken: string): void
     setGuestUser(user: string): void
+    setBandName(band: string): void
 }
 
 class GuestRegister extends React.Component<GuestRegProps> {
@@ -55,6 +48,8 @@ class GuestRegister extends React.Component<GuestRegProps> {
         this.setState({ register: json })
         this.props.updateToken(json.token)
         this.props.setGuestUser(json.guest.username)
+        this.props.setBandName(json.guest.bandName)
+        this.props.setGuestId(json.guest.id)
         console.log(json)
 
         this.setState({
@@ -64,6 +59,7 @@ class GuestRegister extends React.Component<GuestRegProps> {
             lastName: '',
             bandName: '',
             password: ''
+            
         })
     }
 
@@ -78,9 +74,9 @@ class GuestRegister extends React.Component<GuestRegProps> {
             password: ''
         })
     }
-
+    
     render() {
-
+        
         return (
             <div>
                 <h4 onClick={this.handleClick}> Register as a Guest</h4>

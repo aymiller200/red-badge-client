@@ -1,0 +1,53 @@
+.books-container {
+    border-radius: 0px !important;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.8) !important ;
+    
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+
+    .books-header {
+        font-family: "Big Shoulders Display", sans-serif !important;
+       font-weight: bolder;
+       font-size: large;
+       letter-spacing: 1.4px;
+    }
+
+    .dates{
+        //margin-top: -10px;
+        margin-top: 0%;
+    }
+
+    hr{
+        margin: 5px;
+    }
+
+    .notes{
+        padding: 5px !important;
+    }
+}
+
+.link{
+    text-decoration: none;
+}
+
+.close{
+    text-decoration: none;
+    color: rgba(255, 0, 0, 0.712);
+    border: 1px solid rgba(255, 0, 0, 0.568); 
+    box-shadow: 0.5px 0.5px 1px black;
+    letter-spacing: 1px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    background-color: rgba(250, 32, 32, 0.061);
+
+    &:hover{
+        background-color: rgba(250, 32, 32, 0.144);
+        transition: 0.2s ease-in-out;
+    }
+    
+}

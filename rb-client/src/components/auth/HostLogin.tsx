@@ -8,6 +8,8 @@ import CloseIcon from '@material-ui/icons/Close'
 interface HostProps {
     hostToken: string | null
     hostUser: string | null
+    hostId: number | null, 
+    setHostId(id:number): void
     setHostUser(hUser:string): void
     updateHostToken(hostToken:string): void
 }
@@ -39,6 +41,7 @@ class HostLogin extends React.Component<HostProps> {
                 this.setState({ login: json })
                this.props.updateHostToken(json.token)
                this.props.setHostUser(json.host.username)
+               this.props.setHostId(json.host.id)
                 console.log(json)
             })
             .catch(err => {

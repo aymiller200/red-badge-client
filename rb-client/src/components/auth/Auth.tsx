@@ -8,10 +8,16 @@ interface AuthProps {
     hostToken: string | null
     guestUser: string | null
     hostUser: string | null
-    updateHostToken(hostToken:string): void
+    bandName: string | null
+    guestId:number | null
+    hostId: number | null, 
+    setHostId(id:number): void
+    setGuestId(id: number): void
+    updateHostToken(hostToken: string): void
     updateToken(newToken: string): void
     setGuestUser(user: string): void
-    setHostUser(hUser:string): void
+    setHostUser(hUser: string): void
+    setBandName(band: string): void
 
 }
 
@@ -24,17 +30,23 @@ class Auth extends React.Component<AuthProps> {
         return (
             <div>
                 <Grid container alignContent="center" justify="center">
-                    <GuestLogin 
-                    token={this.props.token} 
-                    updateToken={this.props.updateToken} 
-                    guestUser={this.props.guestUser}
-                    setGuestUser={this.props.setGuestUser}
+                    <GuestLogin
+                        token={this.props.token}
+                        updateToken={this.props.updateToken}
+                        guestUser={this.props.guestUser}
+                        guestId={this.props.guestId}
+                        setGuestId={this.props.setGuestId}
+                        setGuestUser={this.props.setGuestUser}
+                        bandName={this.props.bandName}
+                        setBandName={this.props.setBandName}
                     />
-                    <HostLogin 
-                    hostToken={this.props.hostToken} 
-                    updateHostToken={this.props.updateHostToken}
-                    hostUser={this.props.hostUser}
-                    setHostUser={this.props.setHostUser}
+                    <HostLogin
+                        hostToken={this.props.hostToken}
+                        hostUser={this.props.hostUser}
+                        hostId={this.props.hostId}
+                        setHostId={this.props.setHostId}
+                        updateHostToken={this.props.updateHostToken}
+                        setHostUser={this.props.setHostUser}
                     />
                 </Grid>
             </div>

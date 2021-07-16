@@ -11,10 +11,16 @@ interface LandingProps {
     hostToken: string | null
     guestUser: string | null
     hostUser: string | null
+    bandName: string | null
+    guestId: number | null
+    hostId: number | null, 
+    setHostId(id:number): void
+    setGuestId(id:number): void
     updateToken(newToken: string): void
     updateHostToken(hostToken: string): void
     setGuestUser(user: string): void
-    setHostUser(hUser:string): void
+    setHostUser(hUser: string): void
+    setBandName(band:string): void
 }
 
 class Landing extends React.Component<LandingProps> {
@@ -38,13 +44,19 @@ class Landing extends React.Component<LandingProps> {
                         <Auth
                             token={this.props.token}
                             updateToken={this.props.updateToken}
-                            hostToken={this.props.hostToken} 
+                            hostToken={this.props.hostToken}
+                            guestId={this.props.guestId}
+                            hostId={this.props.hostId}
+                            setHostId={this.props.setHostId}
+                            setGuestId={this.props.setGuestId}
                             updateHostToken={this.props.updateHostToken}
                             guestUser={this.props.guestUser}
                             hostUser={this.props.hostUser}
                             setGuestUser={this.props.setGuestUser}
                             setHostUser={this.props.setHostUser}
-                            />
+                            bandName={this.props.bandName}
+                            setBandName={this.props.setBandName}
+                        />
                     </Box>
 
                 </Container>
