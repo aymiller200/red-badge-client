@@ -1,0 +1,97 @@
+.details {
+    height: fit-content;
+    overflow-y: scroll !important;
+
+    .form {
+        width: 97%;
+        margin-left: 1.5%;
+    }
+
+    .comment-text {
+        margin-left: 10px;
+        margin-bottom: 2px;
+        font-size: medium;
+        color: rgba(97, 94, 94, 0.746);
+    }
+
+    .details-container {
+        
+        border-radius: 0px !important;
+        margin: 10px;
+        //height: max-content;
+        background-color: rgba(255, 255, 255, 0.8) !important ;
+
+        .books-header {
+            font-family: "Big Shoulders Display", sans-serif !important;
+            font-weight: bolder;
+            font-size: large;
+            letter-spacing: 1.4px;
+        
+        }
+
+        .special-notes{
+            margin-top: 7% !important;
+            margin: auto;
+        }
+
+        .notes{
+            //margin-top: 10%;
+            height: 80px;
+            overflow-y: scroll;
+            padding-left: 10px;
+        }
+
+       .dates-people{
+           margin-top: 8%;
+       }
+
+    }
+
+    .comments-container {
+        border: 1px inset rgba(128, 128, 128, 0.201) !important;
+        border-radius: 5px;
+        overflow-y: scroll;
+        height: 250px !important;
+        margin: 10px;
+
+       
+
+        .all-comments {
+            margin: 10px;
+
+            .reply-body {
+                background-color: rgba(170, 213, 248, 0.219) !important;
+
+                h6 {
+                    margin-left: 10px;
+                }
+            }
+
+            .comments {
+                background-color: rgba(217, 241, 216, 0.452) !important;
+
+                .body {
+                    margin-right: 10px;
+                }
+
+                .button-container {
+                    border-left: 1px solid rgba(128, 128, 128, 0.664);
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+
+                    .edit {
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+
+                    .delete {
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

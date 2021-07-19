@@ -37,7 +37,7 @@ class GuestHome extends React.Component<guestProfileProps>{
                         <h4 onClick={this.handleClick} className="page-nav">Your Schedule</h4>
                         {/* <h4 className="about">About you</h4> */}
                     </Grid>
-                    {this.state.open && <Grid item xs={12} md={4} lg={4} alignContent="center" className="books-menu">
+                    {this.state.open && <Grid item xs={12} md={4} lg={4} className="books-menu">
                         <Switch>
                             <Route path="/">
                                 <Books token={this.props.token} guestId={this.props.guestId} />

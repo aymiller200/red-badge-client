@@ -5,10 +5,11 @@ import NavBar from '../../components/nav/Navbar';
 import GuestHome from '../guest-home/GuestHome'
 import HostHome from '../host-home/HostHome'
 
-import { Route, Link, Switch } from 'react-router-dom'
+//import { Route, Link, Switch } from 'react-router-dom'
 
 interface AppProps {
 }
+
 interface AppState {
   token: string | null
   hostToken: string | null
@@ -126,7 +127,7 @@ class App extends React.Component<AppProps, AppState> {
   hostViews() {
     if (this.state.hostToken || localStorage.getItem('host-token')) {
       return (
-        <HostHome hostId={this.state.hostId} hostToken={this.state.hostToken} />
+        <HostHome hostId={this.state.hostId} hostUser={this.state.hostUser} hostToken={this.state.hostToken} />
       )
     } else {
       return (

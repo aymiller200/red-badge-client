@@ -1,8 +1,6 @@
-import './styles/details.scss'
-
 import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box, TextField, Button, Popper, DialogActions } from "@material-ui/core";
 import { Link } from 'react-router-dom'
-import CommentPost from './CommentPost';
+import HostCommentPost from './HostCommentPost';
 import CancelIcon from '@material-ui/icons/Cancel';
 import EditIcon from '@material-ui/icons/Edit';
 import React from "react";
@@ -10,12 +8,11 @@ import React from "react";
 
 
 interface DetailProps {
-    token: string | null
-    guestId: number | null
+    hostId: number | null
+    hostToken: string | null
+    hostUser: string | null
     firstName: string
-    BookId: number
-    city: string
-    state: string
+    bandName: string
     peopleStaying: string
     notes: string
     startDate: string
@@ -23,6 +20,7 @@ interface DetailProps {
     id: number | null
     HostId: number | null
     GuestId: number | null
+    BookId: number
     username: string
 
 }
@@ -33,14 +31,9 @@ interface CommentState {
     open: boolean
     updateActive: boolean
     updateBody: string
-    //body: string
     updateComment: object
-    token?: string | null
-    guestId?: number | null
     commentId: number | null
     firstName?: string
-    city?: string
-    state?: string
     peopleStaying?: string
     notes?: string
     startDate?: string
@@ -65,7 +58,7 @@ interface CommentArr {
     HostId: number | null
 }
 
-class Details extends React.Component<DetailProps, CommentState>{
+class HostDetails extends React.Component<DetailProps, CommentState>{
 
     constructor(props: DetailProps) {
         super(props)
@@ -78,19 +71,19 @@ class Details extends React.Component<DetailProps, CommentState>{
             updateActive: false,
             open: false,
             commentId: null,
-            url: `http://localhost:3535/comment/all/${this.props.guestId}`,
-            urlLocal: `http://localhost:3535/comment/all/${localStorage.getItem('id')}`
+            url: `http://localhost:3535/comment/host-all/${this.props.hostId}`,
+            urlLocal: `http://localhost:3535/comment/host-all/${localStorage.getItem('host-id')}`
         }
     }
 
     initData = async () => {
 
-        if (this.props.token && this.props.guestId) {
+        if (this.props.hostToken && this.props.hostId) {
             const res = await fetch(this.state.url, {
                 method: "GET",
                 headers: new Headers({
                     "Content-Type": "application/json",
-                    "Authorization": `${this.props.token}`
+                    "Authorization": `${this.props.hostToken}`
                 }),
             })
             const json = await res.json()
@@ -101,7 +94,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                 method: "GET",
                 headers: new Headers({
                     "Content-Type": "application/json",
-                    "Authorization": `${localStorage.getItem('guest-token')}`
+                    "Authorization": `${localStorage.getItem('host-token')}`
                 }),
             })
             const json = await res.json()
@@ -111,15 +104,15 @@ class Details extends React.Component<DetailProps, CommentState>{
 
 
     editComment = async (message: any) => {
-        const res = await fetch(`http://localhost:3535/comment/edit/${message.id}`, {
+        const res = await fetch(`http://localhost:3535/comment/host-edit/${message.id}`, {
             method: "PUT",
             headers: new Headers({
                 "Content-Type": "application/json",
-                "Authorization": `${localStorage.getItem('guest-token')}`
+                "Authorization": `${localStorage.getItem('host-token')}`
             }),
             body: JSON.stringify({
                 body: this.state.updateBody,
-                username: localStorage.getItem('guest-user'),
+                username: localStorage.getItem('host-user'),
                 GuestId: this.props.GuestId,
                 HostId: this.props.HostId,
                 BookId: this.props.BookId
@@ -127,16 +120,15 @@ class Details extends React.Component<DetailProps, CommentState>{
         })
         await res.json()
         this.initData()
-        this.setState({ updateActive: false, updateBody: '' })
-    
+        this.setState({ updateActive: false })
     }
 
     deleteComment = async (message: any) => {
-        const res = await fetch(`http://localhost:3535/comment/delete/${localStorage.getItem('id')}/${message.id}`, {
+        const res = await fetch(`http://localhost:3535/comment/host-delete/${localStorage.getItem('host-id')}/${message.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 "Content-Type": "application/json",
-                "Authorization": `${localStorage.getItem('guest-token')}`
+                "Authorization": `${localStorage.getItem('host-token')}`
             })
         })
         await res.json()
@@ -156,7 +148,7 @@ class Details extends React.Component<DetailProps, CommentState>{
     }
 
     display = () => {
-
+        console.log(this.props.hostUser)
         return (
             <Box className="comments-container" >
                 {this.state.comment?.comments?.length > 0 ? (
@@ -166,7 +158,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                             <Paper className="all-comments" key={Math.random().toString(36).substr(2, 9)}>
                                 {message.BookId === this.props.id ?
                                     <div>
-                                        {message.username === this.props.username ?
+                                        {message.username === this.props.hostUser ?
                                             <Grid className="comments" container alignContent="flex-end" justify="flex-end">
 
                                                 {this.state.updateActive ?
@@ -220,8 +212,8 @@ class Details extends React.Component<DetailProps, CommentState>{
                 <Card className="details-container">
                     <CardContent className="card-content">
                         <Grid container alignContent="center" justify="space-around">
-                            <Typography gutterBottom className="books-header">{`Staying with: ${this.props.firstName}`}</Typography>
-                            <Typography gutterBottom className="books-header" >{`In: ${this.props.city}`}, {this.props.state}</Typography>
+                            <Typography gutterBottom className="books-header">{`Guest: ${this.props.firstName}`}</Typography>
+                            <Typography gutterBottom className="books-header" >{`Band: ${this.props.bandName}`}</Typography>
                         </Grid>
                         <Typography gutterBottom className="books-header special-notes">Special notes: </Typography>
                         <Paper className="notes">
@@ -234,14 +226,14 @@ class Details extends React.Component<DetailProps, CommentState>{
                     </CardContent>
                 </Card>
                 {this.display()}
-                <CommentPost
-                    token={this.props.token}
+                <HostCommentPost
+                    hostToken={this.props.hostToken}
+                    hostId={this.props.hostId}
                     GuestId={this.props.GuestId}
-                    HostId={this.props.HostId}
                     BookId={this.props.BookId}
+                    HostId={this.props.HostId}
                     id={this.props.id}
                     initData={this.initData}
-                    guestId={this.props.guestId}
                 />
                 <Link to="/" onClick={this.handleClick} className="close">Close</Link>
 
@@ -250,4 +242,4 @@ class Details extends React.Component<DetailProps, CommentState>{
     }
 }
 
-export default Details
+export default HostDetails

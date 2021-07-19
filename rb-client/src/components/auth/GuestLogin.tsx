@@ -57,9 +57,6 @@ class GuestLogin extends React.Component<GuestProps> {
         })
     }
 
-   
-
-
     render() {
         return (
             <form onSubmit={this.handleSubmit} >
