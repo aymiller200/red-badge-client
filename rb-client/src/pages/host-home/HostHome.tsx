@@ -25,11 +25,12 @@ class HostHome extends React.Component<hostHomeProps>{
     render() {
 
         return (
-            <Container maxWidth="xl">
+            <Container maxWidth="xl" >
                 <h4>Welcome Host</h4>
-                <Grid container direction="column">
-                </Grid>
+                <Container maxWidth="xl" className="profile">
+                <Grid container direction="row" justify="flex-start">
                 <h4 onClick={this.handleClick} className="page-nav">Your Schedule</h4>
+                </Grid>
                     {this.state.open && <Grid item xs={12} md={4} lg={4} className="books-menu">
                         <Switch>
                             <Route path="/">
@@ -38,11 +39,11 @@ class HostHome extends React.Component<hostHomeProps>{
                         </Switch>
                         
                     </Grid>}
-
+                </Container>
             </Container>
 
         )
-    }
-}
+
+}}
 
 export default HostHome

@@ -158,7 +158,7 @@ class HostDetails extends React.Component<DetailProps, CommentState>{
                             <Paper className="all-comments" key={Math.random().toString(36).substr(2, 9)}>
                                 {message.BookId === this.props.id ?
                                     <div>
-                                        {message.username === this.props.hostUser ?
+                                        {message.username === localStorage.getItem('host-user') ?
                                             <Grid className="comments" container alignContent="flex-end" justify="flex-end">
 
                                                 {this.state.updateActive ?

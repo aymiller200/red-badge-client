@@ -2,6 +2,7 @@ import './styles/guestHome.scss'
 
 import React from "react";
 import Books from './Books';
+import SearchHosts from '../find-hosts/SearchHosts'
 import { Container, Grid } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ class GuestHome extends React.Component<guestProfileProps>{
             <Container maxWidth="xl">
                 <h4>{localStorage.getItem('band')}</h4>
                 <Container maxWidth="xl" className="profile">
-                    <Grid container direction="row" justify="flex-start" >
+                    <Grid container direction="row" justify="flex-start">
                         <h4 onClick={this.handleClick} className="page-nav">Your Schedule</h4>
                         {/* <h4 className="about">About you</h4> */}
                     </Grid>
@@ -43,8 +44,10 @@ class GuestHome extends React.Component<guestProfileProps>{
                                 <Books token={this.props.token} guestId={this.props.guestId} />
                             </Route>
                         </Switch>
-                        
                     </Grid>}
+                    <Route path="/hosts">
+                        <SearchHosts token={this.props.token} bandName={this.props.token} guestId={this.props.guestId}/>
+                    </Route>
                 </Container>
 
             </Container>

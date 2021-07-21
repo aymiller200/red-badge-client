@@ -28,11 +28,13 @@
     .notes{
         padding: 5px !important;
     }
+
+    .content{
+        border-bottom: 1px solid rgba(128, 128, 128, 0.342);
+        margin: 2px;
+    }
 }
 
-.link{
-    text-decoration: none;
-}
 
 .close{
     text-decoration: none;
@@ -44,10 +46,15 @@
     margin: 10px;
     border-radius: 4px;
     background-color: rgba(250, 32, 32, 0.061);
-
+    
     &:hover{
         background-color: rgba(250, 32, 32, 0.144);
         transition: 0.2s ease-in-out;
     }
     
+}
+
+.link{
+    text-decoration: none;
+    color: black;
 }

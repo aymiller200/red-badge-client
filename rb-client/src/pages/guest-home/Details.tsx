@@ -109,7 +109,6 @@ class Details extends React.Component<DetailProps, CommentState>{
         }
     }
 
-
     editComment = async (message: any) => {
         const res = await fetch(`http://localhost:3535/comment/edit/${message.id}`, {
             method: "PUT",
@@ -144,6 +143,20 @@ class Details extends React.Component<DetailProps, CommentState>{
 
     }
 
+    displayUpdate = () => {
+        return(
+            <TextField
+                autoFocus
+                required
+                variant="outlined"
+                type="text"
+                //defaultValue={message.body}
+                value={this.state.updateBody}
+                onChange={(e) => this.setState({ updateBody: e.target.value })}
+                />
+        )
+    }
+
 
     handleClick = () => {
         this.setState({
@@ -166,7 +179,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                             <Paper className="all-comments" key={Math.random().toString(36).substr(2, 9)}>
                                 {message.BookId === this.props.id ?
                                     <div>
-                                        {message.username === this.props.username ?
+                                        {message.username === localStorage.getItem('guest-user') ?
                                             <Grid className="comments" container alignContent="flex-end" justify="flex-end">
 
                                                 {this.state.updateActive ?
@@ -174,14 +187,8 @@ class Details extends React.Component<DetailProps, CommentState>{
                                                         <IconButton onClick={() => this.setState({ updateActive: false })}>
                                                             <CancelIcon />
                                                         </IconButton>
-                                                        <DialogActions>
-                                                            <TextField
-                                                                autoFocus
-                                                                required
-                                                                type="text"
-                                                                value={this.state.updateBody}
-                                                                onChange={(e) => this.setState({ updateBody: e.target.value })}
-                                                            />
+                                                            {this.displayUpdate()}
+                                                                <DialogActions>
                                                             <Button onClick={() => this.editComment(message)}>Done</Button>
                                                         </DialogActions>
 

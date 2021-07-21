@@ -93,12 +93,14 @@ class App extends React.Component<AppProps, AppState> {
   protectedViews() {
     if (this.state.token || localStorage.getItem('guest-token')) { // will be false if token is not string, because NULL is FALSY, coerces in checks to false. same as undefined, both are falsy/false-ish. 
       return (
-    
+        <div>
           <GuestHome
             bandName={this.state.bandName}
             token={this.state.token}
             guestId={this.state.guestId}
           />
+
+</div>
         
       )
 

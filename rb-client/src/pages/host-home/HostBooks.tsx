@@ -31,7 +31,7 @@ interface Booking {
     BookId: number
     startDate: string,
     endDate: string
-    id: number | null
+    id: number 
     username: string
    
 }
@@ -55,7 +55,6 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
         }
     }
     
-
     initData = async () => {
         if (this.props.hostToken && this.props.hostId) {
             const res = await fetch(this.state.url, {
@@ -97,8 +96,8 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
             <div>
                 {this.state.books?.bookings?.map((schedule) => {
                     return (
-                        <Grid container spacing={3} xs={12} md={3} lg={3} key={Math.random().toString(36).substr(2, 9)} >
-                             <Link to={`/${schedule.Guest.firstName}`}  className="link" >
+                        <Grid item key={Math.random().toString(36).substr(2, 9)} >
+                             <Link to={`/${schedule.Guest.firstName}/${schedule.id}`}  className="link" >
 
                             <Card className="books-container" onClick={this.handleClick}>
                                 <Grid container direction="row" justify="space-evenly" >
@@ -120,7 +119,7 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
                             </Card>
                                 {this.state.open ?
                                    
-                                   <Route exact path={`/${schedule.Guest.firstName}`}>
+                                   <Route exact path={`/${schedule.Guest.firstName}/${schedule.id}`}>
                                        <HostDetails
                                            hostId={this.props.hostId}
                                            bandName={schedule.Guest.bandName}
