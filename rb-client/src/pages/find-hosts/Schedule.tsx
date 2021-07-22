@@ -1,7 +1,7 @@
 import './styles/schedule.scss'
 
 import React from "react";
-import {Dialog, TextField, IconButton, Container, Grid, Button} from '@material-ui/core'
+import {Dialog, TextField, Grid, Button} from '@material-ui/core'
 import Close from "@material-ui/icons/Close";
 import {Link} from 'react-router-dom'
 
@@ -10,6 +10,7 @@ interface ScheduleProps{
     guestId: number | null
     hostId: number
     hostName: string
+    hostLast: string
 }
 
 class Schedule extends React.Component<ScheduleProps>{
@@ -51,6 +52,7 @@ class Schedule extends React.Component<ScheduleProps>{
         this.setState({book: json})
         console.log(this.state.book)
         console.log(json)
+        this.setState({startDate: '', endDate: '', notes: '', peopleStaying: ''})
 
     }
 
@@ -58,7 +60,7 @@ class Schedule extends React.Component<ScheduleProps>{
         return(
         <Dialog open>
             <form onSubmit={this.book}>
-            <h4>Booking with: {this.props.hostName}</h4>
+            <h4>Booking with: {this.props.hostName} {this.props.hostLast}</h4>
             <Grid container direction="column" >
                 <TextField 
                     type="text"

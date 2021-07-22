@@ -1,11 +1,13 @@
-import React from 'react'
 import './styles/books.scss'
-import { Card, Grid, CardContent, Typography, Paper, Box, IconButton } from '@material-ui/core'
+
+import Details from './Details'
+import React from 'react'
 import { Route, Link } from 'react-router-dom'
+
+import { Card, Grid, CardContent, Typography, Paper, Box, IconButton, Dialog } from '@material-ui/core'
 import CancelIcon from '@material-ui/icons/Cancel';
 import EditIcon from '@material-ui/icons/Edit';
-import Details from './Details'
-
+import UpdateBooks from './UpdateBooks'
 
 interface BooksProps {
     token: string | null
@@ -16,6 +18,7 @@ interface BooksState {
     books: BooksArr
     url: RequestInfo
     open: boolean
+    updateActive: boolean
     notes?: string
     token?: string | null
     guestId?: number | null
@@ -36,14 +39,12 @@ interface Booking {
     endDate: string
     id: number
     username: string
-
 }
 
 interface Host {
     firstName: string,
     city: string,
     state: string
-
 }
 
 class Books extends React.Component<BooksProps, BooksState> {
@@ -55,14 +56,10 @@ class Books extends React.Component<BooksProps, BooksState> {
                 bookings: []
             },
             url: `http://localhost:3535/book/schedule/${this.props.guestId}`,
-            open: false
-        }
-    }
+            open: false,
+            updateActive: false,
 
-    handleClick = () => {
-        this.setState({
-            open: true
-        })
+        }
     }
 
     initData = async () => {
@@ -77,8 +74,6 @@ class Books extends React.Component<BooksProps, BooksState> {
             const json = await res.json()
             this.setState({ books: json })
             console.log(this.state.books)
-
-
         } else {
             const res = await fetch(`http://localhost:3535/book/schedule/${localStorage.getItem('id')}`, {
                 method: "GET",
@@ -89,29 +84,67 @@ class Books extends React.Component<BooksProps, BooksState> {
             })
             const json = await res.json()
             this.setState({ books: json })
-
-            console.log('->', this.state.books)
         }
     }
 
     deleteBook = async (book: any) => {
-        const res = await fetch(`http://localhost:3535/book/delete/${localStorage.getItem('id')}/${book.id}`,{
-            method:'DELETE',
+        const res = await fetch(`http://localhost:3535/book/delete/${localStorage.getItem('id')}/${book.id}`, {
+            method: 'DELETE',
             headers: new Headers({
-                'Content-Type': 'application/json', 
+                'Content-Type': 'application/json',
                 'Authorization': `${localStorage.getItem('guest-token')}`
             })
         })
-       await res.json()
-       this.initData()
-      
+        await res.json()
+        this.initData()
     }
 
+    // editBook = async (book: any) => {
+    //     const res = await fetch(`http://localhost:3535/book/edit/${localStorage.getItem('id')}/${book.id}`, {
+    //         method: 'PUT',
+    //         headers: new Headers({
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `${localStorage.getItem('guest-token')}`
+    //         }),
+    //         body: JSON.stringify({
+    //             //username: localStorage.getItem('guest-user'),
+    //             startDate: this.state.editStartDate,
+    //             endDate: this.state.editEndDate,
+    //             peopleStaying: this.state.editPeopleStaying,
+    //             notes: this.state.editNotes,
+    //             // GuestId: localStorage.getItem('id'), 
+    //             // HostId: this.props.hostId
+    //         })
+    //     })
+    //     await res.json()
+    //     this.initData()
+
+    // }
+
+    deleteComment = async (message: any) => {
+        const res = await fetch(`http://localhost:3535/comment/delete/${localStorage.getItem('id')}/${message.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                "Content-Type": "application/json",
+                "Authorization": `${localStorage.getItem('guest-token')}`
+            })
+        })
+        await res.json()
+        this.initData()
+    }
+
+    handleClick = () => {
+        this.setState({
+            open: true
+        })
+    }
 
     componentDidMount = () => {
         this.initData()
 
     }
+
+
 
     render() {
         return (
@@ -119,13 +152,29 @@ class Books extends React.Component<BooksProps, BooksState> {
 
                 {this.state?.books.bookings.length > 0 ? (
                     this.state?.books.bookings?.map((schedule: Booking) => {
-                        //    localStorage.setItem('book-id', schedule.id)
                         return (
                             <Grid item key={Math.random().toString(36).substr(2, 9)}>
-
+                                            {this.state.updateActive &&
+                                                <Route path={`/edit/${schedule.id}`}>
+                                                    <UpdateBooks
+                                                        token={this.props.token}
+                                                        guestId={this.props.guestId}
+                                                        startDate={schedule.startDate}
+                                                        endDate={schedule.endDate}
+                                                        firstName={schedule.Host.firstName}
+                                                        peopleStaying={schedule.peopleStaying}
+                                                        city={schedule.Host.city}
+                                                        state={schedule.Host.state}
+                                                        notes={schedule.notes}
+                                                        initData={this.initData} 
+                                                        BookId={schedule.id}  
+                                                    />
+                                                    </Route>
+                                            }
                                 <Card onClick={this.handleClick} className="books-container" >
-                                        <Link to={`/${schedule.Host.firstName}/${schedule.id}`} className="link" >
-                                    <CardContent className="content">
+                                    <Link to={`/${schedule.Host.firstName}/${schedule.id}`} className="link" >
+                                        <CardContent className="content">
+
                                             <Grid container direction="row" justify="space-evenly" >
                                                 <Typography gutterBottom className="books-header">{`Staying with: ${schedule?.Host.firstName}`}</Typography>
                                                 <Typography gutterBottom className="books-header" >{`In: ${schedule?.Host.city}`}, {schedule?.Host.state}</Typography>
@@ -136,24 +185,24 @@ class Books extends React.Component<BooksProps, BooksState> {
                                                 <p className="notes">{schedule?.notes}</p>
                                             </Paper>
                                             <Grid container direction="row" justify="space-between">
-                                                <Typography className="books-header">{`Peopls staying: ${schedule?.peopleStaying}`}</Typography>
+                                                <Typography className="books-header">{`People staying: ${schedule?.peopleStaying}`}</Typography>
 
                                                 <Typography className="books-header">{`From ${schedule?.startDate} to ${schedule?.endDate}`}</Typography>
                                             </Grid>
-                                    </CardContent>
+                                        </CardContent>
+                                    </Link>
+                                    <Grid container justify="flex-end">
+                                        <Link to={`/edit/${schedule.id}`}>
+                                        <IconButton className="edit">
+                                            <EditIcon onClick={() => this.setState({ updateActive: true })} fontSize="small" />
+                                        </IconButton>
                                         </Link>
-                                        <Grid container justify="flex-end">
-                                    <IconButton className="edit">
-                                        <EditIcon fontSize="small" />
-                                    </IconButton>
-                                    <IconButton className="delete">
-                                        <CancelIcon onClick={() => this.deleteBook(schedule)} fontSize="small" />
-                                    </IconButton>
+                                        <IconButton className="delete">
+                                            <CancelIcon onClick={() => this.deleteBook(schedule)} fontSize="small" />
+                                        </IconButton>
                                     </Grid>
                                 </Card>
-
                                 {this.state.open ?
-
                                     <Route exact path={`/${schedule.Host.firstName}/${schedule.id}`}>
                                         <Details
                                             token={this.props.token}
@@ -170,21 +219,17 @@ class Books extends React.Component<BooksProps, BooksState> {
                                             HostId={schedule.HostId}
                                             BookId={schedule.BookId}
                                             username={schedule.username}
+                                            deleteComment={this.deleteComment}
 
                                         />
                                     </Route>
-
-
                                     : null}
                             </Grid>
-
                         )
-
                     })) : <h4>You don't have any stays scheduled!</h4>}
             </Box>
         )
     }
-
 }
 
 export default Books

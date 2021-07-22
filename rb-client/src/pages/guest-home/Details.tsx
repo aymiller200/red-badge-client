@@ -1,6 +1,6 @@
 import './styles/details.scss'
 
-import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box, TextField, Button, Popper, DialogActions } from "@material-ui/core";
+import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box, TextField, Button, DialogActions } from "@material-ui/core";
 import { Link } from 'react-router-dom'
 import CommentPost from './CommentPost';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -24,6 +24,7 @@ interface DetailProps {
     HostId: number | null
     GuestId: number | null
     username: string
+    deleteComment(message:any): void
 
 }
 interface CommentState {
@@ -35,6 +36,7 @@ interface CommentState {
     updateBody: string
     //body: string
     updateComment: object
+    deleteComment?(message:any):void
     token?: string | null
     guestId?: number | null
     commentId: number | null
@@ -130,18 +132,18 @@ class Details extends React.Component<DetailProps, CommentState>{
     
     }
 
-    deleteComment = async (message: any) => {
-        const res = await fetch(`http://localhost:3535/comment/delete/${localStorage.getItem('id')}/${message.id}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                "Content-Type": "application/json",
-                "Authorization": `${localStorage.getItem('guest-token')}`
-            })
-        })
-        await res.json()
-        this.initData()
+    // deleteComment = async (message: any) => {
+    //     const res = await fetch(`http://localhost:3535/comment/delete/${localStorage.getItem('id')}/${message.id}`, {
+    //         method: 'DELETE',
+    //         headers: new Headers({
+    //             "Content-Type": "application/json",
+    //             "Authorization": `${localStorage.getItem('guest-token')}`
+    //         })
+    //     })
+    //     await res.json()
+    //     this.initData()
 
-    }
+    // }
 
     displayUpdate = () => {
         return(
@@ -174,7 +176,7 @@ class Details extends React.Component<DetailProps, CommentState>{
             <Box className="comments-container" >
                 {this.state.comment?.comments?.length > 0 ? (
                     this.state.comment?.comments?.map((message) => {
-
+                        
                         return (
                             <Paper className="all-comments" key={Math.random().toString(36).substr(2, 9)}>
                                 {message.BookId === this.props.id ?
@@ -200,7 +202,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                                                     <IconButton onClick={() => this.setState({ updateActive: true })} className="edit">
                                                         <EditIcon fontSize="small" />
                                                     </IconButton>
-                                                    <IconButton onClick={() => this.deleteComment(message)} className="delete">
+                                                    <IconButton onClick={() => this.props.deleteComment(message)} className="delete">
                                                         <CancelIcon fontSize="small" />
                                                     </IconButton>
                                                 </Grid>
@@ -211,6 +213,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                                             : <Grid container alignContent="flex-start" justify="flex-start" className="reply-body">
                                                 <h6>{message.body}</h6>
                                             </Grid>
+                        
                                         }
                                     </div>
                                     : null}
@@ -218,7 +221,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                         )
                     })) : null}
 
-            </Box>)
+               </Box>)
     }
 
     render() {

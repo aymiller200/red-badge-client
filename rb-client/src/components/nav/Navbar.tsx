@@ -1,6 +1,5 @@
 import './navbar.scss'
 import React from "react";
-import { Link, Route, Switch } from 'react-router-dom'
 import { Drawer, ListItem, List, ListItemText, IconButton, Grid, Divider, AppBar, Box } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
@@ -8,7 +7,7 @@ import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 
 import HostRegister from '../auth/HostRegister';
 import GuestRegister from '../auth/GuestRegister';
-import SearchHosts from '../../pages/find-hosts/SearchHosts';
+
 
 interface NavProps {
     token: string | null
@@ -93,13 +92,6 @@ class NavBar extends React.Component<NavProps> {
                         </ListItem>
                         <Divider />
                         <br />
-                        <ListItem>
-                            <ListItemText className="li" >
-                                <Link to="/hosts" className="li">
-                                    <h4>Find Hosts</h4>
-                                </Link>
-                            </ListItemText>
-                        </ListItem>
                         <ListItem>
                             <ListItemText className="li" >
                                 <h4 onClick={this.props.guestLogout}>Logout</h4>

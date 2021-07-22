@@ -1,4 +1,4 @@
-import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box, TextField, Button, Popper, DialogActions } from "@material-ui/core";
+import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box, TextField, Button, DialogActions } from "@material-ui/core";
 import { Link } from 'react-router-dom'
 import HostCommentPost from './HostCommentPost';
 import CancelIcon from '@material-ui/icons/Cancel';

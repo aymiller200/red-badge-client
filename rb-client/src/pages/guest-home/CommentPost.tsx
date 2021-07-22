@@ -53,7 +53,7 @@ class CommentPost extends React.Component<PostProps>{
                     <Grid container justify="space-between">
                         <p className="comment-text">Leave a Comment:</p>
                         <DialogActions>
-                            <IconButton onClick={this.submit}>
+                            <IconButton type="submit">
                                 <SendIcon />
                             </IconButton>
                         </DialogActions>

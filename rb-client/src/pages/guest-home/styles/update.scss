@@ -1,0 +1,27 @@
+.edit-book {
+    .exit {
+        justify-self: flex-start !important;
+        margin-bottom: 0px !important;
+    }
+
+    .edit-container {
+        background-color: rgba(216, 211, 211, 0) !important;
+
+        .books-container {
+            margin-top: 0px;
+
+            &:hover{
+                cursor: auto;
+                transform: none;
+            }
+        }
+
+        .edit-me{
+
+            &:hover{
+                cursor: pointer; 
+                transform: scale(1.02);
+            }
+        }
+    }
+}
