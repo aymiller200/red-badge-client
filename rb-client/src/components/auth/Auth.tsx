@@ -9,10 +9,14 @@ interface AuthProps {
     guestUser: string | null
     hostUser: string | null
     bandName: string | null
-    guestId:number | null
-    hostId: number | null, 
-    setHostId(id:number): void
-    setGuestId(id: number): void
+    guestId: number | null
+    hostId: number | null,
+    hostFirst: string | null
+    hostLast: string | null
+    setHostFirst(first: string): void
+    setHostLast(last: string): void
+    setHostId(id: number): void
+    setGuestId(id: number | null): void
     updateHostToken(hostToken: string): void
     updateToken(newToken: string): void
     setGuestUser(user: string): void
@@ -23,10 +27,7 @@ interface AuthProps {
 
 class Auth extends React.Component<AuthProps> {
 
-
-
     render() {
-        //console.log('Auth', this.props.token)
         return (
             <div>
                 <Grid container alignContent="center" justify="center">
@@ -44,6 +45,10 @@ class Auth extends React.Component<AuthProps> {
                         hostToken={this.props.hostToken}
                         hostUser={this.props.hostUser}
                         hostId={this.props.hostId}
+                        hostFirst={this.props.hostFirst}
+                        hostLast={this.props.hostLast}
+                        setHostFirst={this.props.setHostFirst}
+                        setHostLast={this.props.setHostLast}
                         setHostId={this.props.setHostId}
                         updateHostToken={this.props.updateHostToken}
                         setHostUser={this.props.setHostUser}

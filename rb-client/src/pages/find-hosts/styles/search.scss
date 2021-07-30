@@ -4,10 +4,40 @@
     margin: 10px;
 }
 
+
+.link-btn{
+   text-decoration: none;
+   margin: auto
+}
+
 .book-btn{
     font-size: small;
-    width: 2%;
-    margin: auto;
-    margin-bottom: 10px;
+    width: 2% ;
+    margin-bottom: 10px !important;
 }
+
+.city{
+    margin: 10px !important;
+    margin-bottom: 10% !important;
+}
+
+.state{
+    margin: 10px !important;
+    margin-bottom: 10% !important;
+}
+
+.all-search{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.486);
+    margin-top: 0%;
+    font-size: x-large;
+    padding: 5px;
+
+    &:hover{
+        cursor: pointer;
+        border-bottom: 1px solid black;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.5s;
+    }
+}
+
 

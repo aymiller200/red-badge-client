@@ -6,55 +6,98 @@ import Alert from '@material-ui/lab/Alert'
 import CloseIcon from '@material-ui/icons/Close'
 
 
-interface GuestProps {
+interface GuestLoginProps {
     token: string | null;
     guestUser: string | null
     bandName: string | null
     guestId: number | null
-    setGuestId(id:number): void
+    setGuestId(id: any): void
     updateToken(newToken: string): void
     setGuestUser(user: string): void
     setBandName(band: string): void
 }
 
-class GuestLogin extends React.Component<GuestProps> {
-    state = {
-        email: '',
-        password: '',
-        login: {},
-        error: false,
-        open: false,
-    }
+interface GuestLoginState{
+    email: string | null, 
+    password: string | null,  
+    error: boolean, 
+    open: boolean
+}
 
-    handleSubmit = (e:any) => {
-        e.preventDefault()
-        fetch('http://localhost:3535/guest/login', {
-            method: "POST",
-            headers: new Headers({
-                "Content-Type": "application/json"
-            }),
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
-            })
-        })
-            .then(res => res.json())
-            .then(json => {
-                this.setState({ login: json })
-                this.props.updateToken(json.token)
-                this.props.setGuestUser(json.guest.username)
-                this.props.setBandName(json.guest.bandName)
-                this.props.setGuestId(json.guest.id)
-                console.log(json)
-            })
-            .catch(err => {
-                this.setState({ error: true, open: true })
-                console.log(err)
-            })
-        this.setState({
+
+
+class GuestLogin extends React.Component<GuestLoginProps, GuestLoginState> {
+
+    constructor(props: GuestLoginProps){
+        super(props)
+        this.state = {
             email: '',
             password: '',
-        })
+            error: false,
+            open: false,
+        }
+
+    }  
+
+    // handleSubmit = (e: any) => {
+    //      e.preventDefault()
+    //     fetch('http://localhost:3535/guest/login', {
+    //         method: "POST",
+    //         headers: new Headers({
+    //             "Content-Type": "application/json"
+    //         }),
+    //         body: JSON.stringify({
+    //             email: this.state.email,
+    //             password: this.state.password
+    //         })
+    //     })
+    //         .then(res => res.json())
+    //         .then(json => {
+    //             this.setState({ guest: json })
+    //             this.props.updateToken(json.token)
+    //             this.props.setGuestUser(json.guest.username)
+    //             this.props.setBandName(json.guest.bandName)
+    //             //this.props.setGuestId(json.guest.id)
+    //             //console.log(json.guest.id)
+    //             console.log(this.props.bandName)
+    //             this.props.setGuestId(this.state.guest.guest.id)
+    //             console.log(this.props.guestId)
+    //             console.log(this.state.guest.guest.id)
+    //             console.log(this.state.guest)
+                
+    //         })
+    //         .catch(err => {
+    //             this.setState({ error: true, open: true })
+    //             console.log(error)
+    //         })
+    //     this.setState({
+    //         email: '',
+    //         password: '',
+    //     })
+    // }
+
+    handleSubmit = async (e:any) => {
+        e.preventDefault()
+        try{
+            const res = await fetch('http://localhost:3535/guest/login', {
+                method: 'POST', 
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify({
+                    email: this.state.email, 
+                    password: this.state.password
+                }),
+            })
+            const json = await res.json()
+            this.props.updateToken(json.token)
+            this.props.setGuestUser(json.guest.username)
+            this.props.setBandName(json.guest.bandName)
+            this.props.setGuestId(json.guest.id)
+        }catch(error){
+            this.setState({ error: true, open: true })
+            console.log(error)
+        }
     }
 
     render() {

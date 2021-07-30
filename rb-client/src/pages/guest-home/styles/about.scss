@@ -1,0 +1,92 @@
+.about-section {
+    background-color: rgba(169, 170, 170, 0.103);
+    background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
+    background-position-x: 70%;
+    height: 62vh !important;
+    
+    .bio-title{
+        margin: 0px;
+        text-align: left;
+        font-size: x-large !important;
+        margin-left: 2%;
+
+        &:hover{
+            cursor: pointer;
+            letter-spacing: 0.8px;
+            transition-duration: 0.3s;
+        }
+    }
+
+    .bio-title-none{
+        margin: 0px;
+        text-align: left;
+        font-size: x-large !important;
+        margin-left: 2%;
+    }
+
+    .bio {
+        word-wrap: break-word;
+        border-radius: 10px;
+        margin: 5px;
+        margin-top: 10px;
+        height: 200px !important;
+        width: 97% !important;
+        background-color: rgb(255, 255, 255);
+        background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.226);
+        overflow: scroll !important;
+        margin-bottom: 30px;
+        
+        .bio-text {
+            margin: 20px;
+        }
+
+        .bio-input {
+            width: 100% !important;
+            padding: 10px;
+        }
+    }
+
+    .genre{
+        border-radius: 10px;
+        margin: 5px;
+        margin-top: 10px;
+        padding: 10px;
+        word-wrap: break-word;
+        width: 93% !important;
+        background-color: rgb(255, 255, 255);
+        background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.226);
+        overflow-y: scroll;
+        margin-bottom: 30px;
+
+        .genre-text{
+            margin-left: 20px;
+            color:rgba(0, 0, 0, 0.541) !important;
+            font-style: italic;
+        }     
+    }
+}
+
+.social-media{
+    border-radius: 10px;
+    margin: 5px ;
+
+    margin-top: 10px;
+    word-wrap: break-word;
+    width: 93% !important;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png") !important;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.226);
+    overflow-y: scroll;
+
+    .social-text{  
+        margin-left: 20px;
+        font-style: italic;
+    }   
+}
+
+.update-body{
+    margin: 20px !important
+}

@@ -1,5 +1,7 @@
+import './styles/guestRegister.scss'
+
 import React from "react";
-import { Dialog, TextField, DialogTitle, Grid, Button, DialogActions, FormControl } from "@material-ui/core";
+import { Dialog, TextField, DialogTitle, Grid, Button, DialogActions, FormControl, Typography } from "@material-ui/core";
 
 
 interface GuestRegProps {
@@ -13,20 +15,35 @@ interface GuestRegProps {
     setBandName(band: string): void
 }
 
-class GuestRegister extends React.Component<GuestRegProps> {
+interface GuestRegState{
+    email: string,
+    username: string,
+    firstName: string,
+    lastName: string,
+    bandName: string,
+    password: string,
+    token: string,
+    open: boolean
+}
 
+class GuestRegister extends React.Component<GuestRegProps, GuestRegState> {
 
-    state = {
-        email: '',
-        username: '',
-        firstName: '',
-        lastName: '',
-        bandName: '',
-        password: '',
-        token: '',
-        register: {},
-        open: false,
+    constructor(props: GuestRegProps){
+        super(props)
+        this.state = {
+            email: '',
+            username: '',
+            firstName: '',
+            lastName: '',
+            bandName: '',
+            password: '',
+            token: '',
+            open: false,
+        }
+
     }
+
+
 
     handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -45,12 +62,10 @@ class GuestRegister extends React.Component<GuestRegProps> {
             })
         });
         const json = await res.json()
-        this.setState({ register: json })
         this.props.updateToken(json.token)
         this.props.setGuestUser(json.guest.username)
         this.props.setBandName(json.guest.bandName)
         this.props.setGuestId(json.guest.id)
-        console.log(json)
 
         this.setState({
             email: '',
@@ -83,7 +98,7 @@ class GuestRegister extends React.Component<GuestRegProps> {
                 {this.state.open && <Dialog open>
                     <form onSubmit={this.handleSubmit}>
                         <FormControl>
-                            <DialogTitle id='form-dialog-title'>Musician on the Road? <br /> Register as a guest!</DialogTitle>
+                            <Typography className='guest-reg-title'>Musician on the Road? <br /> Register as a guest!</Typography>
                             <TextField
                                 type="email"
                                 required

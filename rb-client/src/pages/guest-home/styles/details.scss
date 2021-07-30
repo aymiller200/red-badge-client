@@ -1,6 +1,6 @@
 .details {
-    height: fit-content;
-    overflow-y: scroll !important;
+    
+    // overflow-y: scroll !important;
 
     .form {
         width: 97%;
@@ -53,11 +53,14 @@
         overflow-y: scroll;
         height: 250px !important;
         margin: 10px;
+    
 
        
 
         .all-comments {
             margin: 10px;
+            word-wrap: break-word !important;
+            width: 100% !important;
 
             .reply-body {
                 background-color: rgba(170, 213, 248, 0.219) !important;
@@ -69,6 +72,9 @@
 
             .comments {
                 background-color: rgba(217, 241, 216, 0.452) !important;
+                word-wrap: break-word !important;
+                flex-wrap: wrap;
+                //width: 9% !important;
 
                 .body {
                     margin-right: 10px;

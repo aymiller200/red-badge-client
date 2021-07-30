@@ -5,54 +5,80 @@ h4 {
     font-weight: bolder !important;
 }
 
-.profile {
-    content: "";
-    z-index: -1;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
-        url(https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/78134549_2995907943770120_2505554195294191616_n.jpg?_nc_cat=110&ccb=1-3&_nc_sid=730e14&_nc_ohc=gStJVRQAt8QAX9k3YMH&_nc_ht=scontent-ort2-2.xx&oh=e1d4d6221068460fdf176fccbb5e7c22&oe=60FA13CB) !important;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-position: center;
-    width: 100% !important;
-    height: 80vh !important;
-    margin: auto;
+.page-nav-container{
+    background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+         url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/46502046_1831968030248982_5165752471947051008_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=uqEquZnL5KEAX9VDZO4&_nc_ht=scontent-ort2-2.xx&oh=2dbcaf73c449fa0f15d7b5f11c194efd&oe=61262805") !important;
+         height: 10vh;
+         background-position-y: 88%;
+         margin-top: 1% !important;
+         height: 13vh !important;
 }
 
-.page-nav {
-    font-size: larger;
+.profile {
+    width: 100% !important;
     
-    font-family: "Big Shoulders Display" sans-serif !important;
+        .page-nav {
+            margin-top: 20px !important;
+            font-size: x-large;
+            font-family: "Big Shoulders Display" sans-serif !important;
+            letter-spacing: 1px;
+        }
+}
 
-    &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-        letter-spacing: 2px;
-        transition: 0.2s ease-in-out;
+.find-hosts {
+    margin-top: 5%;
+    margin: 10px;
+    height: 15%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)),
+        url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/65240655_10156598316363095_2493805677328203776_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=R5Pgr1plH2MAX8lHieW&_nc_ht=scontent-ort2-2.xx&oh=e584834a224e5f5cad30124e0106df45&oe=6129439A");
+    background-position-y: 60%;
+    background-position-x: 0%;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.322);
+
+    h4 {
+        text-align: left;
+        text-shadow: 2px 5px white;
+        letter-spacing: 1px;
+        margin-left: 10px;
+        margin-top: 10px;
     }
 }
 
-// .about{
-//     display: flex;
-//     justify-self: center !important;
+.find-schedule{
+    margin-top: 5%;
+    margin: 10px;
+    height: 15%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)),
+        url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/46511136_1831968136915638_7040754104674549760_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=H3HBD84Iq38AX_4-7OF&tn=uaM0q8zxAxMMosD-&_nc_ht=scontent-ort2-2.xx&oh=6b9a18087f181fb6098f185fb23f4280&oe=6127BB91");
+    background-position-y: 20%;
+    background-position-x: 40%;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.322);
 
-//     font-size: larger;
-//     font-family: "Big Shoulders Display" sans-serif !important;
+    h4 {
+        text-align: left;
+        text-shadow: 2px 5px white;
+        letter-spacing: 1px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
 
-//     &:hover {
-//         cursor: pointer;
-//         text-decoration: underline;
-//         letter-spacing: 2px;
-//         transition: 0.2s ease-in-out;
-//     }
-// }
-
- .books-menu {
-    background-color: rgba(241, 241, 241, 0.52);
+.books-menu {
+    background-color: rgb(255, 255, 255);
+    margin: 10px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    background-color: rgba(169, 170, 170, 0.103);
+    background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
     overflow-y: scroll;
-    //width: max-content;
-    //align-items: center;
-    //justify-content: center;
-    height: 88%;
+    height: 55vh !important;
+}
+
+.schedule-hosts {
+    margin-top: 20px !important;
+    height: 90% !important;
+}
+
+.find-bio{
+    height: 5%
 }

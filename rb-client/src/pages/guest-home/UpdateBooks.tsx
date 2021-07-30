@@ -2,7 +2,7 @@ import './styles/update.scss'
 
 import React from "react";
 import { Link } from 'react-router-dom'
-import { Card, Grid, CardContent, Typography, Paper, TextField, IconButton, Dialog } from '@material-ui/core'
+import { Card, Grid, CardContent, Typography, Paper, TextField, IconButton, Dialog, Tooltip } from '@material-ui/core'
 import CancelIcon from '@material-ui/icons/Cancel';
 
 interface UpdateProps {
@@ -43,13 +43,10 @@ class UpdateBooks extends React.Component<UpdateProps>{
                 'Authorization': `${localStorage.getItem('guest-token')}`
             }),
             body: JSON.stringify({
-                //username: localStorage.getItem('guest-user'),
                 startDate: this.state.editStartDate,
                 endDate: this.state.editEndDate,
                 peopleStaying: this.state.editPeopleStaying,
                 notes: this.state.editNotes,
-                // GuestId: localStorage.getItem('id'), 
-                // HostId: this.props.hostId
             })
         })
         await res.json()
@@ -86,7 +83,11 @@ class UpdateBooks extends React.Component<UpdateProps>{
                                             onChange={(e) => this.setState({ editNotes: e.target.value })}
                                         />
                                     </form>
-                                    : <p onClick={() => this.setState({ updateActiveNotes: true })} className="notes">{this.props.notes}</p>}
+                                    : 
+                                    <Tooltip title="Edit notes">
+                                    <p onClick={() => this.setState({ updateActiveNotes: true })} className="notes">{this.props.notes}</p>
+                                    </Tooltip>
+                                    }
 
                             </Paper>
                             <Grid container direction="row" justify="space-between">
@@ -100,7 +101,9 @@ class UpdateBooks extends React.Component<UpdateProps>{
                                             onChange={(e) => this.setState({ editPeopleStaying: e.target.value })}
                                         />
                                     </form> :
-                                    <Typography onClick={() => this.setState({ updateActivePeopleStaying: true })} className="books-header edit-me">{`People staying: ${this.props.peopleStaying}`}</Typography>}
+                                    <Tooltip title="Edit the number of people staying">
+                                    <Typography onClick={() => this.setState({ updateActivePeopleStaying: true })} className="books-header edit-me">{`People staying: ${this.props.peopleStaying}`}</Typography>
+                                    </Tooltip>}
                                 <hr />
 
                                 {this.state.updateActiveStartDate ?
@@ -112,7 +115,11 @@ class UpdateBooks extends React.Component<UpdateProps>{
                                             onChange={(e) => this.setState({ editStartDate: e.target.value })}
                                         />
                                     </form>
-                                    : <Typography onClick={() => this.setState({ updateActiveStartDate: true })} className="books-header edit-me">{`From: ${this.props.startDate}`}</Typography>}
+                                    :
+                                    <Tooltip title="Edit start date"> 
+                                    <Typography onClick={() => this.setState({ updateActiveStartDate: true })} className="books-header edit-me">{`From: ${this.props.startDate}`}</Typography>
+                                    </Tooltip>
+                                    }
                                 <hr />
                                 {this.state.updateActiveEndDate ? 
                                     <form onSubmit={this.editBook}>
@@ -123,7 +130,11 @@ class UpdateBooks extends React.Component<UpdateProps>{
                                         onChange={(e) => this.setState({ editEndDate: e.target.value })}
                                     />
                                 </form>
-                                : <Typography onClick={() => this.setState({ updateActiveEndDate: true })} className="books-header edit-me"> To: {`${this.props.endDate}`}</Typography>}
+                                :
+                                <Tooltip title="Edit end date"> 
+                                <Typography onClick={() => this.setState({ updateActiveEndDate: true })} className="books-header edit-me"> To: {`${this.props.endDate}`}</Typography>
+                                </Tooltip>
+                                }
                                 
                             </Grid>
                         </CardContent>

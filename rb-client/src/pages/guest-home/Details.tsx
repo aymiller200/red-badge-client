@@ -1,11 +1,11 @@
 import './styles/details.scss'
 
-import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box, TextField, Button, DialogActions } from "@material-ui/core";
-import { Link } from 'react-router-dom'
+import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box } from "@material-ui/core";
+import { Link, Route } from 'react-router-dom'
 import CommentPost from './CommentPost';
-import CancelIcon from '@material-ui/icons/Cancel';
-import EditIcon from '@material-ui/icons/Edit';
+
 import React from "react";
+import CommentUpdate from './CommentUpdate';
 
 
 
@@ -24,19 +24,13 @@ interface DetailProps {
     HostId: number | null
     GuestId: number | null
     username: string
-    deleteComment(message:any): void
-
 }
+
 interface CommentState {
     comment: CommentObj
     url: RequestInfo
     urlLocal: RequestInfo
     open: boolean
-    updateActive: boolean
-    updateBody: string
-    //body: string
-    updateComment: object
-    deleteComment?(message:any):void
     token?: string | null
     guestId?: number | null
     commentId: number | null
@@ -75,9 +69,6 @@ class Details extends React.Component<DetailProps, CommentState>{
             comment: {
                 comments: []
             },
-            updateComment: {},
-            updateBody: '',
-            updateActive: false,
             open: false,
             commentId: null,
             url: `http://localhost:3535/comment/all/${this.props.guestId}`,
@@ -111,54 +102,17 @@ class Details extends React.Component<DetailProps, CommentState>{
         }
     }
 
-    editComment = async (message: any) => {
-        const res = await fetch(`http://localhost:3535/comment/edit/${message.id}`, {
-            method: "PUT",
+    deleteComment = async (message: number | null) => {
+        const res = await fetch(`http://localhost:3535/comment/delete/${localStorage.getItem('id')}/${message}`, {
+            method: 'DELETE',
             headers: new Headers({
-                "Content-Type": "application/json",
-                "Authorization": `${localStorage.getItem('guest-token')}`
-            }),
-            body: JSON.stringify({
-                body: this.state.updateBody,
-                username: localStorage.getItem('guest-user'),
-                GuestId: this.props.GuestId,
-                HostId: this.props.HostId,
-                BookId: this.props.BookId
+                'Content-Type': 'application/json',
+                'Authorization': `${localStorage.getItem('guest-token')}`
             })
         })
         await res.json()
         this.initData()
-        this.setState({ updateActive: false, updateBody: '' })
-    
     }
-
-    // deleteComment = async (message: any) => {
-    //     const res = await fetch(`http://localhost:3535/comment/delete/${localStorage.getItem('id')}/${message.id}`, {
-    //         method: 'DELETE',
-    //         headers: new Headers({
-    //             "Content-Type": "application/json",
-    //             "Authorization": `${localStorage.getItem('guest-token')}`
-    //         })
-    //     })
-    //     await res.json()
-    //     this.initData()
-
-    // }
-
-    displayUpdate = () => {
-        return(
-            <TextField
-                autoFocus
-                required
-                variant="outlined"
-                type="text"
-                //defaultValue={message.body}
-                value={this.state.updateBody}
-                onChange={(e) => this.setState({ updateBody: e.target.value })}
-                />
-        )
-    }
-
 
     handleClick = () => {
         this.setState({
@@ -176,44 +130,27 @@ class Details extends React.Component<DetailProps, CommentState>{
             <Box className="comments-container" >
                 {this.state.comment?.comments?.length > 0 ? (
                     this.state.comment?.comments?.map((message) => {
-                        
+
                         return (
                             <Paper className="all-comments" key={Math.random().toString(36).substr(2, 9)}>
                                 {message.BookId === this.props.id ?
                                     <div>
                                         {message.username === localStorage.getItem('guest-user') ?
                                             <Grid className="comments" container alignContent="flex-end" justify="flex-end">
-
-                                                {this.state.updateActive ?
-                                                    <Dialog open>
-                                                        <IconButton onClick={() => this.setState({ updateActive: false })}>
-                                                            <CancelIcon />
-                                                        </IconButton>
-                                                            {this.displayUpdate()}
-                                                                <DialogActions>
-                                                            <Button onClick={() => this.editComment(message)}>Done</Button>
-                                                        </DialogActions>
-
-                                                    </Dialog>
-                                                    : null}
-
-                                                <h6 className="body">{message.body}</h6>
-                                                <Grid className="button-container">
-                                                    <IconButton onClick={() => this.setState({ updateActive: true })} className="edit">
-                                                        <EditIcon fontSize="small" />
-                                                    </IconButton>
-                                                    <IconButton onClick={() => this.props.deleteComment(message)} className="delete">
-                                                        <CancelIcon fontSize="small" />
-                                                    </IconButton>
-                                                </Grid>
-
-
+                                                    <CommentUpdate
+                                                        token={this.props.token}
+                                                        commentId={message.id}
+                                                        commentBody={message.body}
+                                                        guestId={this.props.guestId}
+                                                        initData={this.initData}
+                                                        deleteComment={this.deleteComment}
+                                                        />      
                                             </Grid>
 
                                             : <Grid container alignContent="flex-start" justify="flex-start" className="reply-body">
                                                 <h6>{message.body}</h6>
                                             </Grid>
-                        
+
                                         }
                                     </div>
                                     : null}
@@ -221,7 +158,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                         )
                     })) : null}
 
-               </Box>)
+            </Box>)
     }
 
     render() {

@@ -15,21 +15,34 @@ interface NavProps {
     guestUser: string | null
     guestId: number | null
     hostUser: string | null
+    hostId: number | null
     bandName: string | null
+    hostFirst: string | null
+    hostLast: string | null
+    setHostFirst(first: string): void
+    setHostLast(last: string): void
     setGuestId(id: number): void
     updateToken(newToken: string): void
     updateHostToken(hostToken: string): void
     setGuestUser(user: string): void
     setHostUser(hUser: string): void
+    setHostId(id: number): void
     guestLogout(): void
     hostLogout(): void
     setBandName(band: string): void
 }
 
-class NavBar extends React.Component<NavProps> {
+interface NavState {
+    open: boolean
+}
 
-    state = {
-        open: false
+class NavBar extends React.Component<NavProps, NavState> {
+    constructor(props: NavProps){
+        super(props)
+        this.state = {
+            open: false
+        }
+
     }
 
     handleClick = () => {
@@ -56,6 +69,12 @@ class NavBar extends React.Component<NavProps> {
                             <HostRegister
                                 hostToken={this.props.token}
                                 hostUser={this.props.hostUser}
+                                hostId={this.props.hostId}
+                                hostFirst={this.props.hostFirst}
+                                hostLast={this.props.hostLast}
+                                setHostFirst={this.props.setHostFirst}
+                                setHostLast={this.props.setHostLast}
+                                setHostId={this.props.setHostId}
                                 updateHostToken={this.props.updateHostToken}
                                 setHostUser={this.props.setHostUser}
                             />
@@ -118,6 +137,12 @@ class NavBar extends React.Component<NavProps> {
                             <HostRegister
                                 hostToken={this.props.token}
                                 hostUser={this.props.hostUser}
+                                hostId={this.props.hostId}
+                                hostFirst={this.props.hostFirst}
+                                hostLast={this.props.hostLast}
+                                setHostFirst={this.props.setHostFirst}
+                                setHostLast={this.props.setHostLast}
+                                setHostId={this.props.setHostId}
                                 updateHostToken={this.props.updateHostToken}
                                 setHostUser={this.props.setHostUser}
                             />
@@ -145,21 +170,14 @@ class NavBar extends React.Component<NavProps> {
                 <List className="drawer" >
                     <ListItem>
                         <ListItemText className="li">
+                        <Grid container direction="row" alignContent="center" justify="center">
                             <h3 >On Tour</h3>
+                            <AirportShuttleIcon className="nav-van" />
+                        </Grid>
                         </ListItemText>
                     </ListItem>
                     <Divider />
                     <br />
-                    <ListItem>
-                        <ListItemText className="li">
-                            <h4>Your Books</h4>
-                        </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemText className="li" >
-                            <h4>Find other Hosts</h4>
-                        </ListItemText>
-                    </ListItem>
                     <ListItem>
                         <ListItemText className="li" >
                             <h4 onClick={this.props.hostLogout}>Logout</h4>

@@ -60,8 +60,8 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
             const res = await fetch(this.state.url, {
                 method: 'GET',
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    "Authorization": `${this.props.hostToken}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `${this.props.hostToken}`
                 })
             })
             const json = await res.json()
@@ -69,10 +69,10 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
             console.log(this.state.books)
         } else {
             const res = await fetch(`http://localhost:3535/book/host-schedule/${localStorage.getItem('host-id')}`, {
-                method: "GET",
+                method: 'GET',
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    "Authorization": `${localStorage.getItem('host-token')}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('host-token')}`
                 })
             })
             const json = await res.json()
@@ -94,26 +94,27 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
     render() {
         return (
             <div>
-                {this.state.books?.bookings?.map((schedule) => {
+                {this.state.books.bookings.length > 0 ? 
+                    this.state.books?.bookings?.map((schedule) => {
                     return (
                         <Grid item key={Math.random().toString(36).substr(2, 9)} >
-                             <Link to={`/${schedule.Guest.firstName}/${schedule.id}`}  className="link" >
+                             <Link to={`/${schedule.Guest.firstName}/${schedule.id}`}  className='link' >
 
-                            <Card className="books-container" onClick={this.handleClick}>
-                                <Grid container direction="row" justify="space-evenly" >
-                                    <Typography gutterBottom className="books-header">{`Guest: ${schedule?.Guest.firstName}`}</Typography>
-                                    <Typography className="books-header">{`Band: ${schedule?.Guest.bandName}`}</Typography>
+                            <Card className='books-container' onClick={this.handleClick}>
+                                <Grid container direction='row' justify='space-evenly' >
+                                    <Typography gutterBottom className='books-header'>{`Guest: ${schedule?.Guest.firstName}`}</Typography>
+                                    <Typography className='books-header'>{`Band: ${schedule?.Guest.bandName}`}</Typography>
                                 </Grid>
                                 <hr />
                                 <CardContent>
-                                    <Typography gutterBottom className="books-header">Special notes: </Typography>
+                                    <Typography gutterBottom className='books-header'>Special notes: </Typography>
                                     <Paper>
-                                        <p className="notes">{schedule?.notes}</p>
+                                        <p className='notes'>{schedule?.notes}</p>
                                     </Paper>
-                                    <Grid container direction="row" justify="space-between">
-                                        <Typography className="books-header">{`Peopls staying: ${schedule?.peopleStaying}`}</Typography>
+                                    <Grid container direction='row' justify='space-between'>
+                                        <Typography className='books-header'>{`People staying: ${schedule?.peopleStaying}`}</Typography>
 
-                                        <Typography className="books-header">{`From ${schedule?.startDate} to ${schedule?.endDate}`}</Typography>
+                                        <Typography className='books-header'>{`From ${schedule?.startDate} to ${schedule?.endDate}`}</Typography>
                                     </Grid>
                                 </CardContent>
                             </Card>
@@ -137,14 +138,12 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
                                            username={schedule.username}
 
                                        />
-                                   </Route>
-
-                               
+                                   </Route>   
                                : null}
                             </Link>
                         </Grid>
                     )
-                })}
+                }): <h4>No one has booked with you yet!</h4>}
 
             </div>
         )

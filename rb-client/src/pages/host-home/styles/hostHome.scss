@@ -1,0 +1,67 @@
+.host-profile{
+    width: 100% !important;
+    margin: auto;
+}
+
+.host-nav-container {
+    margin-top: 1% !important;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+        url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/78142794_2995907660436815_5829292290312503296_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=730e14&_nc_ohc=65yIppymbe0AX8ag4fx&_nc_ht=scontent-ort2-2.xx&oh=0cbd7e5101a2e23260f681e5219b5fa7&oe=61270C84");
+    background-repeat: no-repeat;
+    background-position-y: 48%;
+    background-position-x: 100%;
+    height: 12vh !important;
+    
+    margin: auto;
+}
+
+.host-books-menu{
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png") !important;
+    overflow-y: scroll;
+    height: 55vh !important;
+    margin-top: -20px !important;
+    
+    
+}
+
+.host-schedule {
+    margin: 10px;
+    margin-top: 20px !important;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+    url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/46766004_1831968156915636_8738148733654401024_n.jpg?_nc_cat=110&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=rFFuFQuElwIAX_QYO39&_nc_ht=scontent-ort2-2.xx&oh=37fc9053603af0bcb8abf5065e9ec120&oe=61274CE4");
+    background-position-y: 65%;
+    background-position-x: 60%;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.322);
+    
+    h4 {
+        padding: 2px;
+        padding-bottom: 10px;
+        text-align: left;
+        text-shadow: 2px 5px white;
+        letter-spacing: 1px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
+
+
+.host-bio{
+    margin: 10px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+        url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/120552362_3826229814071258_5732367967202822662_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=a26aad&_nc_ohc=qZpT17GNrF4AX-Rjra-&_nc_ht=scontent-ort2-2.xx&oh=bd8be2901fd82cc45eb15a4372b575b7&oe=612985A5");
+    background-position-y: 72%;
+    background-position-x: 40%;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.322);
+    margin-top: 2% !important;
+
+    h4 {
+        padding: 2px;
+        padding-bottom: 10px;
+        text-shadow: 2px 5px white;
+        letter-spacing: 1px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}

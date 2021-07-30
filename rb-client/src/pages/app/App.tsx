@@ -12,12 +12,14 @@ interface AppProps {
 
 interface AppState {
   token: string | null
-  hostToken: string | null
-  hostId: number | null
-  guestUser: string | null
-  hostUser: string | null
   bandName: string | null
   guestId: number | null
+  guestUser: string | null
+  hostToken: string | null
+  hostUser: string | null
+  hostId: number | null
+  hostFirst: string | null
+  hostLast: string | null
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -26,12 +28,15 @@ class App extends React.Component<AppProps, AppState> {
     super(props)
     this.state = {
       token: null,
-      hostToken: null,
       guestUser: null,
-      hostUser: null,
       bandName: null,
       guestId: null,
-      hostId: null
+      hostToken: null,
+      hostUser: null,
+      hostId: null,
+      hostFirst: null, 
+      hostLast: null,
+
     }
   }
 
@@ -41,39 +46,44 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   setGuestId = (id: number) => {
-    console.log(id)
-    localStorage.setItem('id', JSON.stringify(id))
     this.setState({ guestId: id })
+    localStorage.setItem('id', JSON.stringify(id))
+    console.log(this.state.guestId)
   }
 
   updateToken = (newToken: string) => {
-    console.log(newToken)
     localStorage.setItem('guest-token', newToken)
     this.setState({ token: newToken })
   }
 
   setGuestUser = (user: string) => {
-    console.log(user)
     this.setState({ guestUser: user })
     localStorage.setItem('guest-user', user)
   }
 
   updateHostToken = (hostToken: string) => {
-    console.log(hostToken)
     localStorage.setItem('host-token', hostToken)
     this.setState({ hostToken: hostToken })
   }
 
   setHostUser = (hUser: string) => {
-    console.log(hUser)
     this.setState({ hostUser: hUser })
     localStorage.setItem('host-user', hUser)
   }
 
   setHostId = (id: number) => {
-    console.log(id)
     localStorage.setItem('host-id', JSON.stringify(id))
     this.setState({ hostId: id })
+  }
+
+  setHostFirst = (first: string) => {
+    this.setState({hostFirst: first})
+    localStorage.setItem('host-first', first)
+  }
+
+  setHostLast = (last: string) => {
+    this.setState({hostLast: last})
+    localStorage.setItem('host-last', last)
   }
 
   guestLogout = () => {
@@ -87,11 +97,26 @@ class App extends React.Component<AppProps, AppState> {
 
   }
 
+  componentWillUnmount(){
+    if(!this.state.guestId){
+      this.setState({guestId: null})
+      this.setState({bandName: null})
+      this.setState({token: null})
+      this.setState({guestUser: null})
+    } else if(!this.state.hostId){
+      this.setState({hostId: null})
+      this.setState({hostUser: null})
+      this.setState({hostToken: null})
+      this.setState({hostFirst: null})
+      this.setState({hostLast: null})
+    }
+  }
+
 
 
 
   protectedViews() {
-    if (this.state.token || localStorage.getItem('guest-token')) { // will be false if token is not string, because NULL is FALSY, coerces in checks to false. same as undefined, both are falsy/false-ish. 
+    if (this.state.token || localStorage.getItem('guest-token')) {  
       return (
         <div>
           <GuestHome
@@ -100,8 +125,8 @@ class App extends React.Component<AppProps, AppState> {
             guestId={this.state.guestId}
           />
 
-</div>
-        
+        </div>
+
       )
 
     } else {
@@ -121,6 +146,10 @@ class App extends React.Component<AppProps, AppState> {
           hostUser={this.state.hostUser}
           bandName={this.state.bandName}
           setBandName={this.setBandName}
+          hostFirst={this.state.hostFirst}
+          hostLast={this.state.hostLast}
+          setHostFirst={this.setHostFirst}
+          setHostLast={this.setHostLast}
         />
       )
     }
@@ -129,7 +158,12 @@ class App extends React.Component<AppProps, AppState> {
   hostViews() {
     if (this.state.hostToken || localStorage.getItem('host-token')) {
       return (
-        <HostHome hostId={this.state.hostId} hostUser={this.state.hostUser} hostToken={this.state.hostToken} />
+        <HostHome 
+        hostId={this.state.hostId} 
+        hostUser={this.state.hostUser}
+        hostFirst={this.state.hostFirst}
+        hostLast={this.state.hostLast} 
+        hostToken={this.state.hostToken} />
       )
     } else {
       return (
@@ -148,6 +182,10 @@ class App extends React.Component<AppProps, AppState> {
           hostUser={this.state.hostUser}
           bandName={this.state.bandName}
           setBandName={this.setBandName}
+          hostFirst={this.state.hostFirst}
+          hostLast={this.state.hostLast}
+          setHostFirst={this.setHostFirst}
+          setHostLast={this.setHostLast}
 
         />
       )
@@ -164,8 +202,12 @@ class App extends React.Component<AppProps, AppState> {
           guestUser={this.state.guestUser}
           hostUser={this.state.hostUser}
           guestId={this.state.guestId}
-          // hostId={this.state.hostId}
-          // setHostId={this.setHostId}
+          hostId={this.state.hostId}
+          hostFirst={this.state.hostFirst}
+          hostLast={this.state.hostLast}
+          setHostFirst={this.setHostFirst}
+          setHostLast={this.setHostLast}
+          setHostId={this.setHostId}
           setGuestId={this.setGuestId}
           setHostUser={this.setHostUser}
           updateToken={this.updateToken}
