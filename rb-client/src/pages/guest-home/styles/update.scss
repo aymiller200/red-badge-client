@@ -1,13 +1,14 @@
 .edit-book {
+
     .edit-title {
         box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.171);
         padding: 0px;
         margin-bottom: 10px;
         background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
-            url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/70671541_2352610204851426_4572113538381774848_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=hEQvbcDqQFkAX-HIdqu&_nc_ht=scontent-ort2-2.xx&oh=08cb8765881142d910b3411f0d34c0b1&oe=6123EB35") !important;
+        url("https://scontent-ort2-2.xx.fbcdn.net/v/t1.6435-9/70671541_2352610204851426_4572113538381774848_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=hEQvbcDqQFkAX-HIdqu&_nc_ht=scontent-ort2-2.xx&oh=08cb8765881142d910b3411f0d34c0b1&oe=6123EB35") !important;
         background-position-y: 35%;
         background-position-x: center;
-
+        
         h4 {
             margin: auto;
             margin-bottom: 20px;
@@ -18,6 +19,8 @@
     .edit-container {
         background-color: rgb(255, 255, 255) !important;
         background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png") !important;
+        
+
 
         .books-container {
             margin-top: 5px;
@@ -29,14 +32,22 @@
 
         .content {
             padding: 20px;
-            width: max-content
+            width: 100%;
+            
         }
 
         .edit-me {
             margin: 10px;
+            width:100% !important;
             &:hover {
                 cursor: pointer;
                 transform: scale(1.02);
+            }
+
+            .notes{
+                height: max-content;
+                
+                word-wrap: break-word;
             }
         }
     }

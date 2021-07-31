@@ -27,7 +27,7 @@ interface HostLoginState {
 }
 
 class HostLogin extends React.Component<HostLoginProps, HostLoginState> {
-    constructor(props: HostLoginProps){
+    constructor(props: HostLoginProps) {
         super(props)
         this.state = {
             email: '',
@@ -57,14 +57,11 @@ class HostLogin extends React.Component<HostLoginProps, HostLoginState> {
                 this.props.setHostUser(json.host.username)
                 this.props.setHostId(json.host.id)
             })
+
             .catch(err => {
                 this.setState({ error: true, open: true })
-                
+
             })
-        this.setState({
-            email: '',
-            password: '',
-        })
     }
 
     render() {
