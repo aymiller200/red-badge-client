@@ -1,5 +1,6 @@
 import './styles/about.scss'
 import React from 'react'
+import APIURL from '../../helpers/environment'
 
 import { Grid, TextField, Typography, Box, Link, Button, Input, InputAdornment, Tooltip } from '@material-ui/core'
 
@@ -98,7 +99,7 @@ class About extends React.Component<AboutProps, AboutState> {
 
     initData = async () => {
         if (localStorage.getItem('id')) {
-            const res = await fetch(`http://localhost:3535/aboutyou/get-bio/${localStorage.getItem('id')}`, {
+            const res = await fetch(`${APIURL}/aboutyou/get-bio/${localStorage.getItem('id')}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -111,7 +112,7 @@ class About extends React.Component<AboutProps, AboutState> {
             this.setState({ editBody: json?.info?.body })
 
         } else {
-            const res = await fetch(`http://localhost:3535/aboutyou/get-bio/${this.props.guestId}`, {
+            const res = await fetch(`${APIURL}/aboutyou/get-bio/${this.props.guestId}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ class About extends React.Component<AboutProps, AboutState> {
 
     initGenre = async () => {
         if (localStorage.getItem('id')) {
-            const res = await fetch(`http://localhost:3535/genre/get-genre/${localStorage.getItem('id')}`, {
+            const res = await fetch(`${APIURL}/genre/get-genre/${localStorage.getItem('id')}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -140,7 +141,7 @@ class About extends React.Component<AboutProps, AboutState> {
             this.setState({ editGenre: json?.genre?.genre })
 
         } else {
-            const res = await fetch(`http://localhost:3535/genre/get-genre/${this.props.guestId}`, {
+            const res = await fetch(`${APIURL}/genre/get-genre/${this.props.guestId}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -156,7 +157,7 @@ class About extends React.Component<AboutProps, AboutState> {
 
     initSocial = async () => {
         if (localStorage.getItem('id')) {
-            const res = await fetch(`http://localhost:3535/social-media/get-social-media/${localStorage.getItem('id')}`, {
+            const res = await fetch(`${APIURL}/social-media/get-social-media/${localStorage.getItem('id')}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ class About extends React.Component<AboutProps, AboutState> {
             this.setState({ editSocial: json?.social?.socialMedia })
 
         } else {
-            const res = await fetch(`http://localhost:3535/social-media/get-social-media/${this.props.guestId}`, {
+            const res = await fetch(`${APIURL}/social-media/get-social-media/${this.props.guestId}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -186,7 +187,7 @@ class About extends React.Component<AboutProps, AboutState> {
     postBio = async (e: any) => {
         e.preventDefault()
         if (this.props.guestId) {
-            const res = await fetch('http://localhost:3535/aboutyou/guest-info', {
+            const res = await fetch(`${APIURL}/aboutyou/guest-info`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -200,7 +201,7 @@ class About extends React.Component<AboutProps, AboutState> {
             await res.json()
             this.initData()
         } else {
-            const res = await fetch('http://localhost:3535/aboutyou/guest-info', {
+            const res = await fetch(`${APIURL}/aboutyou/guest-info`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -220,7 +221,7 @@ class About extends React.Component<AboutProps, AboutState> {
     postGenre = async (e: any) => {
         e.preventDefault()
         if (this.props.guestId) {
-            const res = await fetch('http://localhost:3535/genre/post', {
+            const res = await fetch(`${APIURL}/genre/post`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -235,7 +236,7 @@ class About extends React.Component<AboutProps, AboutState> {
             this.initGenre()
 
         } else {
-            const res = await fetch('http://localhost:3535/genre/post', {
+            const res = await fetch(`${APIURL}/genre/post`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -254,7 +255,7 @@ class About extends React.Component<AboutProps, AboutState> {
     postSocial = async (e: any) => {
         e.preventDefault()
         if (this.props.guestId) {
-            const res = await fetch('http://localhost:3535/social-media/post', {
+            const res = await fetch(`${APIURL}/social-media/post`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -268,7 +269,7 @@ class About extends React.Component<AboutProps, AboutState> {
             await res.json()
             this.initSocial()
         } else {
-            const res = await fetch('http://localhost:3535/social-media/post', {
+            const res = await fetch(`${APIURL}/social-media/post`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -287,7 +288,7 @@ class About extends React.Component<AboutProps, AboutState> {
     updateBio = async (e: any) => {
         e.preventDefault()
         if (this.props.guestId) {
-            const res = await fetch(`http://localhost:3535/aboutyou/edit-bio/${this.props.guestId}/${this.state.id}`, {
+            const res = await fetch(`${APIURL}/aboutyou/edit-bio/${this.props.guestId}/${this.state.id}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -301,7 +302,7 @@ class About extends React.Component<AboutProps, AboutState> {
             this.initData()
             this.setState({ updateBody: false })
         } else {
-            const res = await fetch(`http://localhost:3535/aboutyou/edit-bio/${localStorage.getItem('id')}/${this.state.id}`, {
+            const res = await fetch(`${APIURL}/aboutyou/edit-bio/${localStorage.getItem('id')}/${this.state.id}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -320,7 +321,7 @@ class About extends React.Component<AboutProps, AboutState> {
     updateMusic = async (e: any) => {
         e.preventDefault()
         if (this.props.guestId) {
-            const res = await fetch(`http://localhost:3535/genre/edit/${this.props.guestId}/${this.state.genreId}`, {
+            const res = await fetch(`${APIURL}/genre/edit/${this.props.guestId}/${this.state.genreId}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -334,7 +335,7 @@ class About extends React.Component<AboutProps, AboutState> {
             this.initGenre()
             this.setState({ updateGenre: false })
         } else {
-            const res = await fetch(`http://localhost:3535/genre/edit/${localStorage.getItem('id')}/${this.state.genreId}`, {
+            const res = await fetch(`${APIURL}/genre/edit/${localStorage.getItem('id')}/${this.state.genreId}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -353,7 +354,7 @@ class About extends React.Component<AboutProps, AboutState> {
     updateMedia = async (e: any) => {
         e.preventDefault()
         if (this.props.guestId) {
-            const res = await fetch(`http://localhost:3535/social-media/edit/${this.props.guestId}/${this.state.socialId}`, {
+            const res = await fetch(`${APIURL}/social-media/edit/${this.props.guestId}/${this.state.socialId}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -367,7 +368,7 @@ class About extends React.Component<AboutProps, AboutState> {
             this.initSocial()
             this.setState({ updateSocial: false })
         } else {
-            const res = await fetch(`http://localhost:3535/social-media/edit/${localStorage.getItem('id')}/${this.state.socialId}`, {
+            const res = await fetch(`${APIURL}/social-media/edit/${localStorage.getItem('id')}/${this.state.socialId}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',

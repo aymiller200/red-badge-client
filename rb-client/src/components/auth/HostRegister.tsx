@@ -1,7 +1,7 @@
 import './styles/hostRegister.scss'
 
 import React from "react";
-
+import APIURL from '../../helpers/environment';
 import { Dialog, Grid, TextField, Button, Divider, DialogActions, FormControl, Typography, IconButton } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import CloseIcon from '@material-ui/icons/Close'
@@ -58,7 +58,7 @@ class HostRegister extends React.Component<HostRegProps, HostRegState> {
     handleSubmit = async (e: any) => {
         e.preventDefault()
         try {
-            const res = await fetch('http://localhost:3535/host/register', {
+            const res = await fetch(`${APIURL}/host/register`, {
                 method: "POST",
                 headers: new Headers({
                     'Content-Type': 'application/json'

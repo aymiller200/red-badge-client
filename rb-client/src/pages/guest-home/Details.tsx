@@ -1,6 +1,7 @@
 import './styles/details.scss'
 
 import React from "react";
+import APIURL from '../../helpers/environment';
 import CommentUpdate from './CommentUpdate';
 import CommentPost from './CommentPost';
 import { Dialog, Grid, Typography, Card, CardContent, Paper, Box } from "@material-ui/core";
@@ -69,8 +70,8 @@ class Details extends React.Component<DetailProps, CommentState>{
             },
             open: false,
             commentId: null,
-            url: `http://localhost:3535/comment/all/${this.props.guestId}`,
-            urlLocal: `http://localhost:3535/comment/all/${localStorage.getItem('id')}`
+            url: `${APIURL}/comment/all/${this.props.guestId}`,
+            urlLocal: `${APIURL}/comment/all/${localStorage.getItem('id')}`
         }
     }
 
@@ -101,7 +102,7 @@ class Details extends React.Component<DetailProps, CommentState>{
     }
 
     deleteComment = async (message: number | null) => {
-        const res = await fetch(`http://localhost:3535/comment/delete/${localStorage.getItem('id')}/${message}`, {
+        const res = await fetch(`${APIURL}/comment/delete/${localStorage.getItem('id')}/${message}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

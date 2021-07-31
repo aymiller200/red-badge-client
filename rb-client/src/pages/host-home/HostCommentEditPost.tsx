@@ -1,4 +1,5 @@
 import React from "react";
+import APIURL from "../../helpers/environment";
 import { TextField, Grid, IconButton, Button } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -31,7 +32,7 @@ class HostCommentEditPost extends React.Component<HostEditProps, HostEditState>{
 
     editComment = async (e: any) => {
         e.preventDefault()
-        const res = await fetch(`http://localhost:3535/comment/host-edit/${localStorage.getItem('host-id')}/${this.props.commentId}`, {
+        const res = await fetch(`${APIURL}/comment/host-edit/${localStorage.getItem('host-id')}/${this.props.commentId}`, {
             method: 'PUT',
             headers: new Headers({
                 'Content-Type': 'application/json',

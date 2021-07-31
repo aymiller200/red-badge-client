@@ -1,6 +1,7 @@
 import './styles/guestRegister.scss'
 
 import React from "react";
+import APIURL from '../../helpers/environment';
 import { Dialog, TextField, Grid, Button, DialogActions, FormControl, Typography, IconButton } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert'
 import CloseIcon from '@material-ui/icons/Close'
@@ -51,7 +52,7 @@ class GuestRegister extends React.Component<GuestRegProps, GuestRegState> {
     handleSubmit = async (e: any) => {
         e.preventDefault()
         try{
-        const res = await fetch('http://localhost:3535/guest/register', {
+        const res = await fetch(`${APIURL}/guest/register`, {
             method: "POST",
             headers: new Headers({
                 "Content-Type": "application/json"

@@ -1,6 +1,7 @@
 import './styles/hostLogin.scss'
 
 import React from "react";
+import APIURL from '../../helpers/environment';
 import { Grid, TextField, Card, Button, FormControl, IconButton } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import CloseIcon from '@material-ui/icons/Close'
@@ -38,7 +39,7 @@ class HostLogin extends React.Component<HostLoginProps, HostLoginState> {
 
     handleSubmit = (e: any) => {
         e.preventDefault()
-        fetch('http://localhost:3535/host/login', {
+        fetch(`${APIURL}/host/login`, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json'

@@ -1,5 +1,6 @@
 import './styles/update.scss'
 
+import APIURL from '../../helpers/environment';
 import React from "react";
 import { Link } from 'react-router-dom'
 import { Card, Grid, CardContent, Typography, Paper, TextField, IconButton, Dialog, Tooltip, Input, InputAdornment, Button, Box } from '@material-ui/core'
@@ -49,7 +50,7 @@ class UpdateBooks extends React.Component<UpdateProps, UpdateState>{
 
     editBook = async (e: any) => {
         e.preventDefault()
-        const res = await fetch(`http://localhost:3535/book/edit/${localStorage.getItem('id')}/${this.props.BookId}`, {
+        const res = await fetch(`${APIURL}/book/edit/${localStorage.getItem('id')}/${this.props.BookId}`, {
             method: 'PUT',
             headers: new Headers({
                 'Content-Type': 'application/json',

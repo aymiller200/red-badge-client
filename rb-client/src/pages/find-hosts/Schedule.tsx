@@ -1,6 +1,7 @@
 import './styles/schedule.scss'
 
 import React from "react";
+import APIURL from '../../helpers/environment';
 import { Dialog, TextField, Grid, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
@@ -40,7 +41,7 @@ class Schedule extends React.Component<ScheduleProps, ScheduleState>{
 
     book = async (e: any) => {
         e.preventDefault()
-        const res = await fetch(`http://localhost:3535/book/schedule/${localStorage.getItem('id')}`, {
+        const res = await fetch(`${APIURL}/book/schedule/${localStorage.getItem('id')}`, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',

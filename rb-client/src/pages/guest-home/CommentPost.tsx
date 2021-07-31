@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField, Grid, DialogActions, IconButton } from '@material-ui/core'
+import APIURL from "../../helpers/environment";
 import SendIcon from '@material-ui/icons/Send';
 
 interface PostProps {
@@ -24,7 +25,7 @@ class CommentPost extends React.Component<PostProps, PostState>{
         this.state = {
             body: '',
             username: '',
-            url: 'http://localhost:3535/comment/message'
+            url: `${APIURL}/comment/message`
         }
     }
 

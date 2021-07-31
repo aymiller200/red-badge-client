@@ -1,4 +1,5 @@
 import React from "react";
+import APIURL from "../../helpers/environment";
 import { Card, Grid, CardContent, Typography, Paper, IconButton } from '@material-ui/core'
 import { Route, Link } from 'react-router-dom'
 import HostDetails from './HostDetails'
@@ -51,7 +52,7 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
             books: {
                 bookings: []
             },
-            url: `http://localhost:3535/book/host-schedule/${this.props.hostId}`,
+            url: `${APIURL}/book/host-schedule/${this.props.hostId}`,
             open: false
         }
     }
@@ -68,7 +69,7 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
             const json = await res.json()
             this.setState({ books: json })
         } else {
-            const res = await fetch(`http://localhost:3535/book/host-schedule/${localStorage.getItem('host-id')}`, {
+            const res = await fetch(`${APIURL}/book/host-schedule/${localStorage.getItem('host-id')}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',

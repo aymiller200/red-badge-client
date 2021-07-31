@@ -1,7 +1,7 @@
-import React from 'react'
-
 import './styles/aboutHost.scss'
 
+import React from 'react'
+import APIURL from '../../helpers/environment'
 import { Grid, Typography, Box, Button, Input, InputAdornment, Tooltip } from '@material-ui/core'
 
 interface AboutHostProps {
@@ -46,7 +46,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
 
     initData = async () => {
         if (this.props.hostId) {
-            const res = await fetch(`http://localhost:3535/abouthost/host-info/${this.props.hostId}`, {
+            const res = await fetch(`${APIURL}/abouthost/host-info/${this.props.hostId}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
             this.setState({ id: json?.info?.id })
             this.setState({ editBody: json?.info?.body })
         } else {
-            const res = await fetch(`http://localhost:3535/abouthost/host-info/${localStorage.getItem('host-id')}`, {
+            const res = await fetch(`${APIURL}/abouthost/host-info/${localStorage.getItem('host-id')}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
     postBio = async (e: any) => {
         e.preventDefault()
         if (this.props.hostId) {
-            const res = await fetch('http://localhost:3535/abouthost/host-info', {
+            const res = await fetch(`${APIURL}/abouthost/host-info`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
             await res.json()
             this.initData()
         } else {
-            const res = await fetch('http://localhost:3535/abouthost/host-info', {
+            const res = await fetch(`${APIURL}/abouthost/host-info`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
     updateBio = async (e: any) => {
         e.preventDefault()
         if (this.props.hostId) {
-            const res = await fetch(`http://localhost:3535/abouthost/edit-bio/${this.props.hostId}/${this.state.id}`, {
+            const res = await fetch(`${APIURL}/abouthost/edit-bio/${this.props.hostId}/${this.state.id}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
             this.setState({ updateBody: false })
 
         } else {
-            const res = await fetch(`http://localhost:3535/abouthost/edit-bio/${localStorage.getItem('host-id')}/${this.state.id}`, {
+            const res = await fetch(`${APIURL}/abouthost/edit-bio/${localStorage.getItem('host-id')}/${this.state.id}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',

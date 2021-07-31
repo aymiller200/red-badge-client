@@ -1,6 +1,7 @@
 import './styles/books.scss'
 
 import React from 'react'
+import APIURL from '../../helpers/environment'
 import Details from './Details'
 import UpdateBooks from './UpdateBooks'
 import { Route, Link } from 'react-router-dom'
@@ -55,7 +56,7 @@ class Books extends React.Component<BooksProps, BooksState> {
             books: {
                 bookings: []
             },
-            url: `http://localhost:3535/book/schedule/${this.props.guestId}`,
+            url: `${APIURL}/book/schedule/${this.props.guestId}`,
             open: false,
             updateActive: false,
 
@@ -74,7 +75,7 @@ class Books extends React.Component<BooksProps, BooksState> {
             const json = await res.json()
             this.setState({ books: json })
         } else {
-            const res = await fetch(`http://localhost:3535/book/schedule/${localStorage.getItem('id')}`, {
+            const res = await fetch(`${APIURL}/book/schedule/${localStorage.getItem('id')}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -87,7 +88,7 @@ class Books extends React.Component<BooksProps, BooksState> {
     }
 
     deleteBook = async (book: any) => {
-        const res = await fetch(`http://localhost:3535/book/delete/${localStorage.getItem('id')}/${book.id}`, {
+        const res = await fetch(`${APIURL}/book/delete/${localStorage.getItem('id')}/${book.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

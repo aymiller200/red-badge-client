@@ -1,6 +1,6 @@
 import React from "react";
 import HostCommentEditPost from './HostCommentEditPost';
-
+import APIURL from "../../helpers/environment";
 import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box, TextField, DialogActions } from "@material-ui/core";
 import { Link } from 'react-router-dom'
 import SendIcon from '@material-ui/icons/Send'
@@ -70,8 +70,8 @@ class HostDetails extends React.Component<DetailProps, CommentState>{
             commentId: null,
             editBody: null,
             body: null,
-            url: `http://localhost:3535/comment/host-all/${this.props.hostId}`,
-            urlLocal: `http://localhost:3535/comment/host-all/${localStorage.getItem('host-id')}`
+            url: `${APIURL}/comment/host-all/${this.props.hostId}`,
+            urlLocal: `${APIURL}/comment/host-all/${localStorage.getItem('host-id')}`
         }
     }
 
@@ -102,7 +102,7 @@ class HostDetails extends React.Component<DetailProps, CommentState>{
     }
 
     deleteComment = async (message: number | null) => {
-        const res = await fetch(`http://localhost:3535/comment/host-delete/${localStorage.getItem('host-id')}/${message}`, {
+        const res = await fetch(`${APIURL}/comment/host-delete/${localStorage.getItem('host-id')}/${message}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ class HostDetails extends React.Component<DetailProps, CommentState>{
 
     commentPost = async (e: any) => {
         e.preventDefault()
-        const res = await fetch('http://localhost:3535/comment/host-message', {
+        const res = await fetch(`${APIURL}/comment/host-message`, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',

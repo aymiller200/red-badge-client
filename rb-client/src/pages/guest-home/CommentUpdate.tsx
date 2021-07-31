@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid, TextField, IconButton, Button } from '@material-ui/core'
+import APIURL from '../../helpers/environment';
 import CancelIcon from '@material-ui/icons/Cancel';
 import EditIcon from '@material-ui/icons/Edit';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -30,7 +31,7 @@ class CommentUpdate extends React.Component<CommentUpdateProps, CommentUpdateSta
 
     editComment = async (e: any) => {
         e.preventDefault()
-        const res = await fetch(`http://localhost:3535/comment/edit/${localStorage.getItem('id')}/${this.props.commentId}`, {
+        const res = await fetch(`${APIURL}/comment/edit/${localStorage.getItem('id')}/${this.props.commentId}`, {
             method: 'PUT',
             headers: new Headers({
                 'Content-Type': 'application/json',

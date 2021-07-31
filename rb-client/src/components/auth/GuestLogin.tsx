@@ -4,6 +4,7 @@ import React from "react";
 import { Card, Grid, TextField, Button, FormControl, IconButton } from "@material-ui/core"
 import Alert from '@material-ui/lab/Alert'
 import CloseIcon from '@material-ui/icons/Close'
+import APIURL from '../../helpers/environment'
 
 interface GuestLoginProps {
     token: string | null;
@@ -38,7 +39,7 @@ class GuestLogin extends React.Component<GuestLoginProps, GuestLoginState> {
     handleSubmit = async (e: any) => {
         e.preventDefault()
         try {
-            const res = await fetch('http://localhost:3535/guest/login', {
+            const res = await fetch(`${APIURL}/guest/login`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json'

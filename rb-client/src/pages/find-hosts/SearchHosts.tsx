@@ -2,6 +2,7 @@ import './styles/search.scss'
 
 import Schedule from './Schedule'
 import React from "react";
+import APIURL from '../../helpers/environment';
 import { Link, Route } from "react-router-dom";
 import { Card, Grid, Typography, Paper, Button, TextField, Box } from "@material-ui/core";
 
@@ -58,7 +59,7 @@ class SearchHosts extends React.Component<SearchProps, HostsState>{
     }
 
     initData = async () => {
-        const res = await fetch('http://localhost:3535/guest/hosts', {
+        const res = await fetch(`${APIURL}/guest/hosts`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
