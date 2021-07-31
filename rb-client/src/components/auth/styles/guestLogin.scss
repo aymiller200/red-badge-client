@@ -3,20 +3,18 @@
     flex-direction: column;
     align-content: space-around;
     justify-content: space-around;
-    background-color: rgba(249, 249, 249, 0.95) !important;
     padding: 30px;
+    background-color: rgba(249, 249, 249, 0.95) !important;
     background-image: url("https://www.transparenttextures.com/patterns/green-dust-and-scratches.png");
     background-position-x: 65%;
-
-
 }
 
 .card-title{
     font-family:'Big Shoulders Display', sans-serif !important;
     letter-spacing: 1.5px;
-    margin-bottom: 0px;
-    
+    margin-bottom: 0px;   
 }
+
 .submit-button {
     display: flex;
     align-self: center;

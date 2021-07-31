@@ -1,7 +1,5 @@
 .details {
     
-    // overflow-y: scroll !important;
-
     .form {
         width: 97%;
         margin-left: 1.5%;
@@ -14,11 +12,9 @@
         color: rgba(97, 94, 94, 0.746);
     }
 
-    .details-container {
-        
+    .details-container {    
         border-radius: 0px !important;
         margin: 10px;
-        //height: max-content;
         background-color: rgba(255, 255, 255, 0.8) !important ;
 
         .books-header {
@@ -35,7 +31,6 @@
         }
 
         .notes{
-            //margin-top: 10%;
             height: 80px;
             overflow-y: scroll;
             padding-left: 10px;
@@ -47,6 +42,9 @@
 
     }
 
+    .card-content{
+        margin-bottom: 20px;
+    }
     .comments-container {
         border: 1px inset rgba(128, 128, 128, 0.201) !important;
         border-radius: 5px;
@@ -54,30 +52,36 @@
         height: 250px !important;
         margin: 10px;
     
-
-       
-
         .all-comments {
             margin: 10px;
-            word-wrap: break-word !important;
-            width: 100% !important;
+            flex-wrap: wrap !important;
+            width: 95% !important;
+            height: max-content;
 
             .reply-body {
                 background-color: rgba(170, 213, 248, 0.219) !important;
+                height: max-content !important;
 
                 h6 {
                     margin-left: 10px;
+                    margin: auto;
+                    text-align: left;
+                    word-wrap: break-word !important;
+                    width: 60%;
+                    padding: 20px
                 }
             }
 
             .comments {
                 background-color: rgba(217, 241, 216, 0.452) !important;
-                word-wrap: break-word !important;
-                flex-wrap: wrap;
-                //width: 9% !important;
+                align-content: flex-end;
 
                 .body {
+                    text-align: right;
                     margin-right: 10px;
+                    margin: auto;
+                    word-wrap: break-word !important;
+                    width: 60%
                 }
 
                 .button-container {

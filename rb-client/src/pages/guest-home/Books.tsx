@@ -1,13 +1,13 @@
 import './styles/books.scss'
 
-import Details from './Details'
 import React from 'react'
+import Details from './Details'
+import UpdateBooks from './UpdateBooks'
 import { Route, Link } from 'react-router-dom'
-
 import { Card, Grid, CardContent, Typography, Paper, Box, IconButton , Container} from '@material-ui/core'
 import CancelIcon from '@material-ui/icons/Cancel';
 import EditIcon from '@material-ui/icons/Edit';
-import UpdateBooks from './UpdateBooks'
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 interface BooksProps {
     token: string | null
@@ -73,7 +73,6 @@ class Books extends React.Component<BooksProps, BooksState> {
             })
             const json = await res.json()
             this.setState({ books: json })
-            console.log(this.state.books)
         } else {
             const res = await fetch(`http://localhost:3535/book/schedule/${localStorage.getItem('id')}`, {
                 method: 'GET',
@@ -107,7 +106,6 @@ class Books extends React.Component<BooksProps, BooksState> {
 
     componentDidMount = () => {
         this.initData()
-
     }
 
     render() {
@@ -136,10 +134,8 @@ class Books extends React.Component<BooksProps, BooksState> {
                                                     />
                                                     </Route>
                                             }
-                                <Card onClick={this.handleClick} className='books-container' >
-                                    <Link to={`/${schedule.Host.firstName}/${schedule.id}`} className="link" >
+                                <Card className='books-container' >
                                         <CardContent className='content'>
-
                                             <Grid container direction='row' justify='space-evenly' >
                                                 <Typography gutterBottom className='books-header'>{`Staying with: ${schedule?.Host.firstName}`}</Typography>
                                                 <Typography gutterBottom className='books-header' >{`In: ${schedule?.Host.city}`}, {schedule?.Host.state}</Typography>
@@ -155,16 +151,22 @@ class Books extends React.Component<BooksProps, BooksState> {
                                                 <Typography className='books-header'>{`From ${schedule?.startDate} to ${schedule?.endDate}`}</Typography>
                                             </Grid>
                                         </CardContent>
-                                    </Link>
+                                   
                                     <Grid container justify='flex-end'>
                                         <Link to={`/edit/${schedule.id}`}>
                                         <IconButton className='edit'>
                                             <EditIcon onClick={() => this.setState({ updateActive: true })} fontSize='small' />
                                         </IconButton>
                                         </Link>
+                                        <Link to={`/${schedule.Host.firstName}/${schedule.id}`} className="link" >
+                                        <IconButton>
+                                            <MenuBookIcon onClick={() => this.setState({open: true})} fontSize='small' />
+                                        </IconButton>
+                                        </Link>
                                         <IconButton className='delete'>
                                             <CancelIcon onClick={() => this.deleteBook(schedule)} fontSize='small' />
                                         </IconButton>
+                                        
                                     </Grid>
                                 </Card>
                                 {this.state.open ?
@@ -184,8 +186,6 @@ class Books extends React.Component<BooksProps, BooksState> {
                                             HostId={schedule.HostId}
                                             BookId={schedule.BookId}
                                             username={schedule.username}
-                                           
-
                                         />
                                     </Route>
                                     : null}

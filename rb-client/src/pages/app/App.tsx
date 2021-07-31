@@ -5,8 +5,6 @@ import NavBar from '../../components/nav/Navbar';
 import GuestHome from '../guest-home/GuestHome'
 import HostHome from '../host-home/HostHome'
 
-//import { Route, Link, Switch } from 'react-router-dom'
-
 interface AppProps {
 }
 
@@ -48,12 +46,13 @@ class App extends React.Component<AppProps, AppState> {
   setGuestId = (id: number) => {
     this.setState({ guestId: id })
     localStorage.setItem('id', JSON.stringify(id))
-    console.log(this.state.guestId)
   }
 
   updateToken = (newToken: string) => {
-    localStorage.setItem('guest-token', newToken)
     this.setState({ token: newToken })
+    if(this.state.token){
+    localStorage.setItem('guest-token', newToken)
+    }
   }
 
   setGuestUser = (user: string) => {
@@ -62,8 +61,10 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   updateHostToken = (hostToken: string) => {
-    localStorage.setItem('host-token', hostToken)
     this.setState({ hostToken: hostToken })
+    if(this.state.hostToken){
+    localStorage.setItem('host-token', hostToken)
+    }
   }
 
   setHostUser = (hUser: string) => {
@@ -72,8 +73,8 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   setHostId = (id: number) => {
-    localStorage.setItem('host-id', JSON.stringify(id))
     this.setState({ hostId: id })
+    localStorage.setItem('host-id', JSON.stringify(id))
   }
 
   setHostFirst = (first: string) => {
@@ -112,9 +113,6 @@ class App extends React.Component<AppProps, AppState> {
     }
   }
 
-
-
-
   protectedViews() {
     if (this.state.token || localStorage.getItem('guest-token')) {  
       return (
@@ -124,11 +122,9 @@ class App extends React.Component<AppProps, AppState> {
             token={this.state.token}
             guestId={this.state.guestId}
           />
-
         </div>
 
       )
-
     } else {
       return (
         <Landing
@@ -217,11 +213,8 @@ class App extends React.Component<AppProps, AppState> {
           guestLogout={this.guestLogout}
           bandName={this.state.bandName}
           setBandName={this.setBandName}
-
-
         />
         {this.state.token || localStorage.getItem('guest-token') ? this.protectedViews() : this.hostViews()}
-
       </div>
     );
   }

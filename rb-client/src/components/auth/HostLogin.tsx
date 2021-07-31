@@ -25,7 +25,6 @@ interface HostLoginState {
     open: boolean
 }
 
-
 class HostLogin extends React.Component<HostLoginProps, HostLoginState> {
     constructor(props: HostLoginProps){
         super(props)
@@ -35,14 +34,12 @@ class HostLogin extends React.Component<HostLoginProps, HostLoginState> {
             error: false,
             open: false
         }
-
     }
-
 
     handleSubmit = (e: any) => {
         e.preventDefault()
         fetch('http://localhost:3535/host/login', {
-            method: "POST",
+            method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
@@ -58,22 +55,19 @@ class HostLogin extends React.Component<HostLoginProps, HostLoginState> {
                 this.props.updateHostToken(json.token)
                 this.props.setHostUser(json.host.username)
                 this.props.setHostId(json.host.id)
-                console.log(json)
             })
             .catch(err => {
                 this.setState({ error: true, open: true })
-                console.log(err)
+                
             })
         this.setState({
             email: '',
             password: '',
         })
-
     }
 
     render() {
         return (
-
             <form onSubmit={this.handleSubmit}>
                 <FormControl>
                     <Grid container direction='column' alignContent='center' justify='center' style={{ margin: '10px' }}>

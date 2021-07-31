@@ -32,12 +32,12 @@ class Landing extends React.Component<LandingProps> {
     render() {
         return (
 
-            <Grid container direction="row" alignContent="center" justify="center">
-                <h1 className="title">On Tour</h1>
-                <AirportShuttleIcon className="van" />
-                <Container className="landing" maxWidth="xl">
-                    <Grid container direction="row-reverse" alignContent="center" justify="center">
-                        <Box className="text-card" width="100%" height="auto">
+            <Grid container direction='row' alignContent='center' justify='center'>
+                <h1 className='title'>On Tour</h1>
+                <AirportShuttleIcon className='van' />
+                <Container className='landing' maxWidth='xl'>
+                    <Grid container direction='row-reverse' alignContent='center' justify='center'>
+                        <Box className='text-card' width='100%' height='auto'>
                             <CardActions>
                                 <Typography className='landing-text'>
                                 Welcome to OnTour, a website aimed towards helping musicians who are, well, on tour! Being on the road, playing shows, and meeting new friends is a one of a kind experience, but finding a safe place to crash for the night in an unfamiliar city can be a daunting task, coupled with quite a bit of anxiety. Good news is, we're here to help alleviate some of those bad vibes to ensure you can keep groovin' on to wherever else the road takes you. <br /> We believe in musicians helping musicians, so if you have a couch, air mattress, futon, and/or a floor with some soft carpet go ahead and return the favor by also registering as a host! Happy trails and righteous riffs, friends!
@@ -45,7 +45,7 @@ class Landing extends React.Component<LandingProps> {
                             </CardActions>
                         </Box>
                     </Grid>
-                    <Box className="auth-card" height="auto">
+                    <Box className='auth-card' height='auto'>
                         <Auth
                             token={this.props.token}
                             updateToken={this.props.updateToken}

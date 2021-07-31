@@ -12,13 +12,20 @@ interface PostProps {
     initData(): void
 }
 
-class CommentPost extends React.Component<PostProps>{
+interface PostState{
+    body: string 
+    username: string
+    url: RequestInfo
+}
 
-    state = {
-        comment: {},
-        body: '',
-        username: '',
-        url: 'http://localhost:3535/comment/message'
+class CommentPost extends React.Component<PostProps, PostState>{
+    constructor(props: PostProps){
+        super(props)
+        this.state = {
+            body: '',
+            username: '',
+            url: 'http://localhost:3535/comment/message'
+        }
     }
 
     submit = async (e: any) => {
@@ -37,39 +44,36 @@ class CommentPost extends React.Component<PostProps>{
                 BookId: this.props.id
             })
         })
-        const json = await res.json()
-        this.setState({ comment: json })
-        console.log(this.state.comment)
-        console.log(json)
+        await res.json()
         this.setState({ body: '', username: '' })
         this.props.initData()
     }
 
-
     render() {
         return (
-            <div className="post">
+            <div className='post'>
                 <form onSubmit={this.submit}>
-                    <Grid container justify="space-between">
-                        <p className="comment-text">Leave a Comment:</p>
+                    <Grid container justify='space-between'>
+                        <p className='comment-text'>Leave a Comment:</p>
                         <DialogActions>
-                            <IconButton type="submit">
+                            <IconButton type='submit'>
                                 <SendIcon />
                             </IconButton>
                         </DialogActions>
                     </Grid>
                     <TextField
-                        type="text"
-                        variant="outlined"
-                        className="form"
+                        type='text'
+                        variant='outlined'
+                        className='form'
+                        rowsMax={8}
+                        multiline
+                        aria-label='post comment'
                         value={this.state.body}
                         onChange={(e) => this.setState({ body: e.target.value })} />
-
                 </form>
             </div>
         )
     }
-
 }
 
 export default CommentPost

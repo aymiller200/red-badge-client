@@ -2,7 +2,9 @@ import './styles/hostRegister.scss'
 
 import React from "react";
 
-import { Dialog, Grid, TextField, Button, Divider, DialogActions, FormControl, Typography } from '@material-ui/core'
+import { Dialog, Grid, TextField, Button, Divider, DialogActions, FormControl, Typography, IconButton } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert'
+import CloseIcon from '@material-ui/icons/Close'
 
 interface HostRegProps {
     hostToken: string | null
@@ -17,23 +19,24 @@ interface HostRegProps {
     setHostUser(hUser: string): void
 }
 
-interface HostRegState{
+interface HostRegState {
     email: string | null
-        username: string | null
-        firstName: string | null
-        lastName: string | null
-        streetAddress: string | null
-        state: string | null
-        city: string | null
-        zip: string | null
-        password: string | null
-        token: string | null
-        open: boolean
+    username: string | null
+    firstName: string | null
+    lastName: string | null
+    streetAddress: string | null
+    state: string | null
+    city: string | null
+    zip: string | null
+    password: string | null
+    open: boolean
+    error: boolean
+    errorOpen: boolean
 }
 
 class HostRegister extends React.Component<HostRegProps, HostRegState> {
 
-    constructor(props: HostRegProps){
+    constructor(props: HostRegProps) {
         super(props)
         this.state = {
             email: null,
@@ -45,66 +48,58 @@ class HostRegister extends React.Component<HostRegProps, HostRegState> {
             city: null,
             zip: null,
             password: null,
-            token: null,
             open: false,
+            error: false,
+            errorOpen: false
         }
 
     }
 
-
-
-
     handleSubmit = async (e: any) => {
         e.preventDefault()
-        const res = await fetch('http://localhost:3535/host/register', {
-            method: "POST",
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
-            body: JSON.stringify({
-                email: this.state.email,
-                username: this.state.username,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                streetAddress: this.state.streetAddress,
-                state: this.state.state,
-                city: this.state.city,
-                zip: this.state.zip,
-                password: this.state.password,
-            })
-        });
-        const json = await res.json()
-        this.props.updateHostToken(json.token)
-        this.props.setHostUser(json.host.username)
-        this.props.setHostId(json.host.id)
-        this.props.setHostFirst(json.host.firstName)
-        this.props.setHostLast(json.host.lastName)
-        console.log(json)
-        this.setState({
-            email: '',
-            username: '',
-            firstName: '',
-            lastName: '',
-            streetAddress: '',
-            state: '',
-            city: '',
-            zip: '',
-            password: ''
-        })
+        try {
+            const res = await fetch('http://localhost:3535/host/register', {
+                method: "POST",
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify({
+                    email: this.state.email,
+                    username: this.state.username,
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    streetAddress: this.state.streetAddress,
+                    state: this.state.state,
+                    city: this.state.city,
+                    zip: this.state.zip,
+                    password: this.state.password,
+                })
+            });
+            const json = await res.json()
+            this.props.updateHostToken(json.token)
+            this.props.setHostUser(json.host.username)
+            this.props.setHostId(json.host.id)
+            this.props.setHostFirst(json.host.firstName)
+            this.props.setHostLast(json.host.lastName)
+        } catch (error) {
+            this.setState({ error: true, errorOpen: true })
+        }
     }
 
     handleClick = () => {
         this.setState({
             open: !this.state.open,
-            email: '',
-            username: '',
-            firstName: '',
-            lastName: '',
-            streetAddress: '',
-            state: '',
-            city: '',
-            zip: '',
-            password: '',
+            error: false,
+            errorOpen: false,
+            email: null,
+            username: null,
+            firstName: null,
+            lastName: null,
+            streetAddress: null,
+            state: null,
+            city: null,
+            zip: null,
+            password: null,
         })
     }
     render() {
@@ -112,10 +107,19 @@ class HostRegister extends React.Component<HostRegProps, HostRegState> {
             <div>
                 <h4 onClick={this.handleClick}>Register as a Host</h4>
                 {this.state.open && <Dialog open>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} className='host-reg-container'>
                         <FormControl>
                             <Typography className='host-register-title'>Have a heart, <br /> Register as a Host!</Typography>
-
+                            {this.state.error && this.state.errorOpen ?
+                                <Alert severity='error'  action={
+                                    <IconButton
+                                        aria-label='close'
+                                        color='inherit'
+                                        size='small'
+                                        onClick={() => { this.setState({ errorOpen: false, error: false }) }}>
+                                        <CloseIcon fontSize='inherit' />
+                                    </IconButton>
+                                }>User name is already taken!</Alert> : null}
                             <TextField
                                 required
                                 type='email'
@@ -141,7 +145,8 @@ class HostRegister extends React.Component<HostRegProps, HostRegState> {
                                     variant='outlined'
                                     value={this.state.firstName}
                                     onChange={(e) => { this.setState({ firstName: e.target.value }) }}
-                                    style={{ margin: '15px' }} />
+                                    style={{ margin: '15px' }}
+                                />
                                 <TextField
                                     required
                                     type='text'
@@ -149,7 +154,8 @@ class HostRegister extends React.Component<HostRegProps, HostRegState> {
                                     variant='outlined'
                                     value={this.state.lastName}
                                     onChange={(e) => { this.setState({ lastName: e.target.value }) }}
-                                    style={{ margin: '15px' }} />
+                                    style={{ margin: '15px' }}
+                                />
                                 <TextField
                                     required
                                     type='text'
@@ -157,7 +163,8 @@ class HostRegister extends React.Component<HostRegProps, HostRegState> {
                                     variant='outlined'
                                     value={this.state.streetAddress}
                                     onChange={(e) => { this.setState({ streetAddress: e.target.value }) }}
-                                    style={{ margin: '15px' }} />
+                                    style={{ margin: '15px' }}
+                                />
                                 <TextField
                                     required
                                     type='text'
@@ -165,14 +172,16 @@ class HostRegister extends React.Component<HostRegProps, HostRegState> {
                                     variant='outlined'
                                     value={this.state.city}
                                     onChange={(e) => { this.setState({ city: e.target.value }) }}
-                                    style={{ margin: '15px' }} />
+                                    style={{ margin: '15px' }}
+                                />
                                 <TextField
                                     required
                                     label='State'
                                     variant='outlined'
                                     value={this.state.state}
                                     onChange={(e) => { this.setState({ state: e.target.value }) }}
-                                    style={{ margin: '15px' }} />
+                                    style={{ margin: '15px' }}
+                                />
                                 <TextField
                                     required
                                     type='number'

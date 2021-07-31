@@ -1,16 +1,10 @@
 .books-container {
     margin: 12px;
-    margin-top: 30px;
+    margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.8) !important ;
     
-
-    &:hover{
-        cursor: pointer;
-        transform: scale(1.02);
-    }
-
     .books-header {
-        font-family: "Big Shoulders Display", sans-serif !important;
+       font-family: "Big Shoulders Display", sans-serif !important;
        font-weight: bolder;
        font-size: large;
        letter-spacing: 1.4px;
@@ -48,8 +42,7 @@
     &:hover{
         background-color: rgba(250, 32, 32, 0.144);
         transition: 0.2s ease-in-out;
-    }
-    
+    }    
 }
 
 .link{

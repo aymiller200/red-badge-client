@@ -1,13 +1,10 @@
 import './styles/details.scss'
 
-import { Dialog, Grid, Typography, Card, CardContent, Paper, IconButton, Box } from "@material-ui/core";
-import { Link, Route } from 'react-router-dom'
-import CommentPost from './CommentPost';
-
 import React from "react";
 import CommentUpdate from './CommentUpdate';
-
-
+import CommentPost from './CommentPost';
+import { Dialog, Grid, Typography, Card, CardContent, Paper, Box } from "@material-ui/core";
+import { Link } from 'react-router-dom'
 
 interface DetailProps {
     token: string | null
@@ -59,6 +56,7 @@ interface CommentArr {
     BookId: number
     GuestId: number | null
     HostId: number | null
+    createdAt: string
 }
 
 class Details extends React.Component<DetailProps, CommentState>{
@@ -80,10 +78,10 @@ class Details extends React.Component<DetailProps, CommentState>{
 
         if (this.props.token && this.props.guestId) {
             const res = await fetch(this.state.url, {
-                method: "GET",
+                method: 'GET',
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    "Authorization": `${this.props.token}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `${this.props.token}`
                 }),
             })
             const json = await res.json()
@@ -91,10 +89,10 @@ class Details extends React.Component<DetailProps, CommentState>{
 
         } else {
             const res = await fetch(this.state.urlLocal, {
-                method: "GET",
+                method: 'GET',
                 headers: new Headers({
-                    "Content-Type": "application/json",
-                    "Authorization": `${localStorage.getItem('guest-token')}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('guest-token')}`
                 }),
             })
             const json = await res.json()
@@ -127,16 +125,16 @@ class Details extends React.Component<DetailProps, CommentState>{
     display = () => {
 
         return (
-            <Box className="comments-container" >
+            <Box className='comments-container' >
                 {this.state.comment?.comments?.length > 0 ? (
                     this.state.comment?.comments?.map((message) => {
 
                         return (
-                            <Paper className="all-comments" key={Math.random().toString(36).substr(2, 9)}>
+                            <Paper className='all-comments' key={Math.random().toString(36).substr(2, 9)}>
                                 {message.BookId === this.props.id ?
                                     <div>
                                         {message.username === localStorage.getItem('guest-user') ?
-                                            <Grid className="comments" container alignContent="flex-end" justify="flex-end">
+                                            <Grid className='comments' container alignContent='flex-end' justify='flex-end'>
                                                     <CommentUpdate
                                                         token={this.props.token}
                                                         commentId={message.id}
@@ -146,11 +144,9 @@ class Details extends React.Component<DetailProps, CommentState>{
                                                         deleteComment={this.deleteComment}
                                                         />      
                                             </Grid>
-
-                                            : <Grid container alignContent="flex-start" justify="flex-start" className="reply-body">
+                                            : <Grid container alignContent='flex-start' justify='flex-start' className='reply-body'>
                                                 <h6>{message.body}</h6>
                                             </Grid>
-
                                         }
                                     </div>
                                     : null}
@@ -163,20 +159,20 @@ class Details extends React.Component<DetailProps, CommentState>{
 
     render() {
         return (
-            <Dialog open className="details">
-                <Card className="details-container">
-                    <CardContent className="card-content">
-                        <Grid container alignContent="center" justify="space-around">
-                            <Typography gutterBottom className="books-header">{`Staying with: ${this.props.firstName}`}</Typography>
-                            <Typography gutterBottom className="books-header" >{`In: ${this.props.city}`}, {this.props.state}</Typography>
+            <Dialog open className='details'>
+                <Card className='details-container'>
+                    <CardContent className='card-content'>
+                        <Grid container alignContent='center' justify='space-around'>
+                            <Typography gutterBottom className='books-header'>{`Staying with: ${this.props.firstName}`}</Typography>
+                            <Typography gutterBottom className='books-header' >{`In: ${this.props.city}`}, {this.props.state}</Typography>
                         </Grid>
-                        <Typography gutterBottom className="books-header special-notes">Special notes: </Typography>
-                        <Paper className="notes">
+                        <Typography gutterBottom className='books-header special-notes'>Special notes: </Typography>
+                        <Paper className='notes'>
                             <p>{this.props.notes}</p>
                         </Paper>
-                        <Grid container direction="row" justify="space-between" className="dates-people">
-                            <Typography className="books-header">{`People staying: ${this.props.peopleStaying}`}</Typography>
-                            <Typography className="books-header">{`From ${this.props.startDate} to ${this.props.endDate}`}</Typography>
+                        <Grid container direction='row' justify='space-between' className='dates-people'>
+                            <Typography className='books-header'>{`People staying: ${this.props.peopleStaying}`}</Typography>
+                            <Typography className='books-header'>{`From ${this.props.startDate} to ${this.props.endDate}`}</Typography>
                         </Grid>
                     </CardContent>
                 </Card>
@@ -190,8 +186,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                     initData={this.initData}
                     guestId={this.props.guestId}
                 />
-                <Link to="/" onClick={this.handleClick} className="close">Close</Link>
-
+                <Link to="/" onClick={this.handleClick} className='close'>Close</Link>
             </Dialog>
         )
     }

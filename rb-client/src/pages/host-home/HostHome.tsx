@@ -42,8 +42,10 @@ class HostHome extends React.Component<HostHomeProps, HostHomeState>{
                 <Grid container direction='row' className='host-nav-container'></Grid>
                 <Grid container direction='row' justify='space-evenly'>
                 <Grid item xs={12} md={8} lg={8} className='host-bio-menu'>
-                    <Box className='host-bio'>  
-                    <h4>{localStorage.getItem('host-first')} {localStorage.getItem('host-last')}</h4>                
+                    <Box className='host-bio'> 
+                    {this.props.hostFirst && this.props.hostLast ? 
+                    <h4>{this.props.hostFirst} {this.props.hostLast}</h4> 
+                    : <h4>{localStorage.getItem('host-first')} {localStorage.getItem('host-last')}</h4>}               
                     </Box>
                 <Grid item xs={12} md={12} lg={12}>
                     <AboutHost 

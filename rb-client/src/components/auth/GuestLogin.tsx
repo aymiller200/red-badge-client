@@ -5,7 +5,6 @@ import { Card, Grid, TextField, Button, FormControl, IconButton } from "@materia
 import Alert from '@material-ui/lab/Alert'
 import CloseIcon from '@material-ui/icons/Close'
 
-
 interface GuestLoginProps {
     token: string | null;
     guestUser: string | null
@@ -17,18 +16,16 @@ interface GuestLoginProps {
     setBandName(band: string): void
 }
 
-interface GuestLoginState{
-    email: string | null, 
-    password: string | null,  
-    error: boolean, 
+interface GuestLoginState {
+    email: string | null,
+    password: string | null,
+    error: boolean,
     open: boolean
 }
 
-
-
 class GuestLogin extends React.Component<GuestLoginProps, GuestLoginState> {
 
-    constructor(props: GuestLoginProps){
+    constructor(props: GuestLoginProps) {
         super(props)
         this.state = {
             email: '',
@@ -36,56 +33,18 @@ class GuestLogin extends React.Component<GuestLoginProps, GuestLoginState> {
             error: false,
             open: false,
         }
+    }
 
-    }  
-
-    // handleSubmit = (e: any) => {
-    //      e.preventDefault()
-    //     fetch('http://localhost:3535/guest/login', {
-    //         method: "POST",
-    //         headers: new Headers({
-    //             "Content-Type": "application/json"
-    //         }),
-    //         body: JSON.stringify({
-    //             email: this.state.email,
-    //             password: this.state.password
-    //         })
-    //     })
-    //         .then(res => res.json())
-    //         .then(json => {
-    //             this.setState({ guest: json })
-    //             this.props.updateToken(json.token)
-    //             this.props.setGuestUser(json.guest.username)
-    //             this.props.setBandName(json.guest.bandName)
-    //             //this.props.setGuestId(json.guest.id)
-    //             //console.log(json.guest.id)
-    //             console.log(this.props.bandName)
-    //             this.props.setGuestId(this.state.guest.guest.id)
-    //             console.log(this.props.guestId)
-    //             console.log(this.state.guest.guest.id)
-    //             console.log(this.state.guest)
-                
-    //         })
-    //         .catch(err => {
-    //             this.setState({ error: true, open: true })
-    //             console.log(error)
-    //         })
-    //     this.setState({
-    //         email: '',
-    //         password: '',
-    //     })
-    // }
-
-    handleSubmit = async (e:any) => {
+    handleSubmit = async (e: any) => {
         e.preventDefault()
-        try{
+        try {
             const res = await fetch('http://localhost:3535/guest/login', {
-                method: 'POST', 
+                method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify({
-                    email: this.state.email, 
+                    email: this.state.email,
                     password: this.state.password
                 }),
             })
@@ -94,9 +53,8 @@ class GuestLogin extends React.Component<GuestLoginProps, GuestLoginState> {
             this.props.setGuestUser(json.guest.username)
             this.props.setBandName(json.guest.bandName)
             this.props.setGuestId(json.guest.id)
-        }catch(error){
+        } catch (error) {
             this.setState({ error: true, open: true })
-            console.log(error)
         }
     }
 
@@ -104,39 +62,38 @@ class GuestLogin extends React.Component<GuestLoginProps, GuestLoginState> {
         return (
             <form onSubmit={this.handleSubmit} >
                 <FormControl>
-                    <Grid container direction="column" alignContent="center" justify="center" style={{ margin: "10px" }}>
-                        <Card className="guest-login">
+                    <Grid container direction='column' alignContent='center' justify='center' style={{ margin: '10px' }}>
+                        <Card className='guest-login'>
                             {this.state.error &&
-                                <Alert severity="error" action={
+                                <Alert severity='error' action={
                                     <IconButton
-                                        aria-label="close"
-                                        color="inherit"
-                                        size="small"
+                                        aria-label='close'
+                                        color='inherit'
+                                        size='small'
                                         onClick={() => { this.setState({ open: false, error: false }) }}>
-                                        <CloseIcon fontSize="inherit" />
+                                        <CloseIcon fontSize='inherit' />
                                     </IconButton>
                                 }>Your email or password is incorrect!</Alert>}
                             <h1 className="card-title" style={{ textAlign: 'center' }}>Login as Guest</h1>
                             <TextField
-                                type="email"
-                                label="Email"
-                                variant="outlined"
+                                type='email'
+                                label='Email'
+                                variant='outlined'
                                 value={this.state.email}
                                 onChange={(e) => { this.setState({ email: e.target.value }) }}
-                                style={{ margin: "15px", width: '30vw' }} />
+                                style={{ margin: '15px', width: '30vw' }} />
                             <TextField
-                                type="password"
-                                label="Password"
-                                variant="outlined"
+                                type='password'
+                                label='Password'
+                                variant='outlined'
                                 value={this.state.password}
                                 onChange={(e) => { this.setState({ password: e.target.value }) }}
-                                style={{ margin: "15px", width: '30vw' }} />
-                            <Button type="submit" variant="contained" color="primary" className="submit-button">Sign-in</Button>
+                                style={{ margin: '15px', width: '30vw' }} />
+                            <Button type='submit' variant='contained' color='primary' className='submit-button'>Sign-in</Button>
                         </Card>
                     </Grid>
                 </FormControl>
             </form>
-
         )
     }
 }

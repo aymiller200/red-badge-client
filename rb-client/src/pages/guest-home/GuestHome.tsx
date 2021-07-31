@@ -8,8 +8,6 @@ import { Container, Grid, Box } from '@material-ui/core';
 import { Route, Switch, Link } from 'react-router-dom';
 import Footer from './guest-components/Footer';
 
-
-
 interface GuestProfileProps {
     bandName: string | null
     token: string | null
@@ -34,8 +32,7 @@ class GuestHome extends React.Component<GuestProfileProps, GuestProfileState>{
     handleClick = () => {
         this.setState({
             open: !this.state.open
-        })
-       
+        })   
     }
 
     handleSecondClick = () => {
@@ -45,7 +42,7 @@ class GuestHome extends React.Component<GuestProfileProps, GuestProfileState>{
 
     render() {
         return (
-            <Container maxWidth="xl" className='profile'>
+            <Container maxWidth='xl' className='profile'>
                 <Grid className='page-nav-container' container direction='row' ></Grid>
                 <Grid container direction='row'>
                     <Grid item xs={12} md={4} lg={4}>
@@ -59,9 +56,9 @@ class GuestHome extends React.Component<GuestProfileProps, GuestProfileState>{
                             bandName={this.props.bandName} />
                             </Grid>
                     </Grid>
-                    <Grid item xs={12} md={4} lg={4}>
-                        <Box onClick={this.handleClick} className='find-schedule'>
-                        <Link to='/' className='link'>
+                    <Grid  item xs={12} md={4} lg={4}>
+                        <Box className='find-schedule'>
+                        <Link to='/' className='link' onClick={this.handleClick}>
                             <h4  className='page-nav'>Your Schedule</h4>
                         </Link>
                         </Box>

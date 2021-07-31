@@ -159,6 +159,9 @@ class HostDetails extends React.Component<DetailProps, CommentState>{
                     <TextField
                         type='text'
                         variant='outlined'
+                        aria-label='Post comment'
+                        rowsMax={8}
+                        multiline
                         className='form'
                         value={this.state.body}
                         onChange={(e) => this.setState({ body: e.target.value })} />

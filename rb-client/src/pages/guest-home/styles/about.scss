@@ -1,9 +1,10 @@
 .about-section {
+    flex-wrap: nowrap !important;
     background-color: rgba(169, 170, 170, 0.103);
     background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
     background-position-x: 70%;
-    height: 62vh !important;
-    
+    height: max-content !important;
+
     .bio-title{
         margin: 0px;
         text-align: left;
@@ -71,7 +72,7 @@
 .social-media{
     border-radius: 10px;
     margin: 5px ;
-
+    margin-bottom: 40px;
     margin-top: 10px;
     word-wrap: break-word;
     width: 93% !important;

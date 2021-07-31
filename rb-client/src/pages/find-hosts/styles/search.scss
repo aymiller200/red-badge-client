@@ -2,8 +2,15 @@
     text-align: center;
     padding: 10px;
     margin: 10px;
-}
+    box-shadow: none !important;
 
+    .address-text{
+        font-family: 'Big Shoulders Display', sans-serif !important;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+   
+}
 
 .link-btn{
    text-decoration: none;
@@ -38,6 +45,34 @@
         transition-timing-function: ease-in-out;
         transition-duration: 0.5s;
     }
+}
+
+.books-header{
+    margin-top: 10px !important;
+    font-size: x-large !important;
+}
+
+.host-bio-box{
+    border: 1px solid black;
+    width: 80% !important;
+    height: 20vh;
+    word-wrap: break-word;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 5px black;
+
+    .host-bio-text{
+        margin: 15px;
+        margin-top: 1px;
+    }
+
+    .bio-title{
+        font-family: 'Big Shoulders Display', sans-serif !important;
+        font-weight: bolder;
+        margin: 5px;
+        text-decoration: 1px underline;
+    }
+    
 }
 
 

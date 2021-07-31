@@ -1,12 +1,12 @@
 import './navbar.scss'
+
 import React from "react";
+import HostRegister from '../auth/HostRegister';
+import GuestRegister from '../auth/GuestRegister';
 import { Drawer, ListItem, List, ListItemText, IconButton, Grid, Divider, AppBar, Box } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
-
-import HostRegister from '../auth/HostRegister';
-import GuestRegister from '../auth/GuestRegister';
 
 
 interface NavProps {
@@ -42,30 +42,27 @@ class NavBar extends React.Component<NavProps, NavState> {
         this.state = {
             open: false
         }
-
     }
 
     handleClick = () => {
-
         this.setState({
             open: !this.state.open
         })
-
     }
 
     displayNav = () => {
         if (!localStorage.getItem('guest-token')) {
             return (
-                <List className="drawer" >
+                <List className='drawer' >
                     <ListItem>
-                        <ListItemText className="li">
+                        <ListItemText className='li'>
                             <h3 >Welcome!</h3>
                         </ListItemText>
                     </ListItem>
                     <Divider />
                     <br />
                     <ListItem>
-                        <ListItemText className="li">
+                        <ListItemText className='li'>
                             <HostRegister
                                 hostToken={this.props.token}
                                 hostUser={this.props.hostUser}
@@ -81,7 +78,7 @@ class NavBar extends React.Component<NavProps, NavState> {
                         </ListItemText>
                     </ListItem>
                     <ListItem>
-                        <ListItemText className="li" >
+                        <ListItemText className='li' >
                             <GuestRegister
                                 token={this.props.token}
                                 guestUser={this.props.guestUser}
@@ -100,19 +97,19 @@ class NavBar extends React.Component<NavProps, NavState> {
         } else {
             return (
                
-                    <List className="drawer" >
+                    <List className='drawer' >
                         <ListItem>
-                            <ListItemText className="li">
-                                <Grid container direction="row" alignContent="center" justify="center">
+                            <ListItemText className='li'>
+                                <Grid container direction='row' alignContent='center' justify='center'>
                                     <h3 >On Tour</h3>
-                                    <AirportShuttleIcon className="nav-van" />
+                                    <AirportShuttleIcon className='nav-van' />
                                 </Grid>
                             </ListItemText>
                         </ListItem>
                         <Divider />
                         <br />
                         <ListItem>
-                            <ListItemText className="li" >
+                            <ListItemText className='li' >
                                 <h4 onClick={this.props.guestLogout}>Logout</h4>
                             </ListItemText>
                         </ListItem>
@@ -124,16 +121,16 @@ class NavBar extends React.Component<NavProps, NavState> {
     displayHostNav = () => {
         if (!localStorage.getItem('host-token')) {
             return (
-                <List className="drawer" >
+                <List className='drawer' >
                     <ListItem>
-                        <ListItemText className="li">
+                        <ListItemText className='li'>
                             <h3 >Welcome!</h3>
                         </ListItemText>
                     </ListItem>
                     <Divider />
                     <br />
                     <ListItem>
-                        <ListItemText className="li">
+                        <ListItemText className='li'>
                             <HostRegister
                                 hostToken={this.props.token}
                                 hostUser={this.props.hostUser}
@@ -149,7 +146,7 @@ class NavBar extends React.Component<NavProps, NavState> {
                         </ListItemText>
                     </ListItem>
                     <ListItem>
-                        <ListItemText className="li" >
+                        <ListItemText className='li' >
                             <GuestRegister
                                 token={this.props.token}
                                 guestUser={this.props.guestUser}
@@ -167,19 +164,19 @@ class NavBar extends React.Component<NavProps, NavState> {
             )
         } else {
             return (
-                <List className="drawer" >
+                <List className='drawer' >
                     <ListItem>
-                        <ListItemText className="li">
-                        <Grid container direction="row" alignContent="center" justify="center">
+                        <ListItemText className='li'>
+                        <Grid container direction='row' alignContent='center' justify='center'>
                             <h3 >On Tour</h3>
-                            <AirportShuttleIcon className="nav-van" />
+                            <AirportShuttleIcon className='nav-van' />
                         </Grid>
                         </ListItemText>
                     </ListItem>
                     <Divider />
                     <br />
                     <ListItem>
-                        <ListItemText className="li" >
+                        <ListItemText className='li' >
                             <h4 onClick={this.props.hostLogout}>Logout</h4>
                         </ListItemText>
                     </ListItem>
@@ -190,13 +187,13 @@ class NavBar extends React.Component<NavProps, NavState> {
 
     render() {
         return (
-            <Grid container direction="row-reverse">
-                <AppBar className="app-bar">
-                    <IconButton className="menu-button" onClick={this.handleClick} >
-                        {this.state.open ? <MenuOpenIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
+            <Grid container direction='row-reverse'>
+                <AppBar className='app-bar'>
+                    <IconButton className='menu-button' onClick={this.handleClick} >
+                        {this.state.open ? <MenuOpenIcon fontSize='large' /> : <MenuIcon fontSize='large' />}
                     </IconButton>
                 </AppBar>
-                {this.state.open ? <Drawer anchor="left" open onClose={this.handleClick} variant="temporary">
+                {this.state.open ? <Drawer anchor='left' open onClose={this.handleClick} variant='temporary'>
                     <Box width={220} height={1}>
                         {this.props.token || localStorage.getItem('guest-token') ? this.displayNav() : this.displayHostNav()}
                     </Box>

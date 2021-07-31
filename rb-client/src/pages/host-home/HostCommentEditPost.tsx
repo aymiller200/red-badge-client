@@ -1,7 +1,8 @@
 import React from "react";
-import { TextField, Grid, IconButton } from '@material-ui/core'
+import { TextField, Grid, IconButton, Button } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit';
 import CancelIcon from '@material-ui/icons/Cancel';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 interface HostEditProps {
     hostToken: string | null
@@ -54,15 +55,23 @@ class HostCommentEditPost extends React.Component<HostEditProps, HostEditState>{
                         <TextField
                             fullWidth
                             required
-                            type="text"
+                            rowsMax={8}
+                            multiline
+                            aria-label='Edit comment'
+                            type='text'
                             value={this.state.editBody}
                             onChange={(e) => this.setState({ editBody: e.target.value })}
                         />
+                         <Grid container direction='row' justify='flex-end'>
+                        <Button type='submit'>
+                            <CheckBoxIcon fontSize='small' color='primary' />
+                        </Button>
+                        </Grid>
                     </form>
                     : <h6 className='body'>{this.props.body}</h6>}
 
                 <Grid className='button-container'>
-                    <IconButton onClick={() => this.setState({ updateActive: true })} className='edit'>
+                    <IconButton onClick={() => this.setState({ updateActive: !this.state.updateActive })} className='edit'>
                         <EditIcon fontSize='small' />
                     </IconButton>
                     <IconButton onClick={() => this.props.deleteComment(this.props.commentId)} className='delete'>

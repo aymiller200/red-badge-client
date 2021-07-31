@@ -44,9 +44,8 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
         }
     }
 
-
     initData = async () => {
-        if(this.props.hostId){
+        if (this.props.hostId) {
             const res = await fetch(`http://localhost:3535/abouthost/host-info/${this.props.hostId}`, {
                 method: 'GET',
                 headers: new Headers({
@@ -59,57 +58,87 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
             this.setState({ info: json })
             this.setState({ id: json?.info?.id })
             this.setState({ editBody: json?.info?.body })
-            console.log(this.state.info)
-
-        }else{
+        } else {
             const res = await fetch(`http://localhost:3535/abouthost/host-info/${localStorage.getItem('host-id')}`, {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': `${localStorage.getItem('host-token')}`
+                method: 'GET',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('host-token')}`
+                })
             })
-        })
-        const json = await res.json()
-        this.setState({ info: json })
-        this.setState({ info: json })
-        this.setState({ id: json?.info?.id })
-        this.setState({ editBody: json?.info?.body })
-        console.log(this.state.info)
-    }
+            const json = await res.json()
+            this.setState({ info: json })
+            this.setState({ info: json })
+            this.setState({ id: json?.info?.id })
+            this.setState({ editBody: json?.info?.body })
+        }
     }
 
     postBio = async (e: any) => {
         e.preventDefault()
-        const res = await fetch('http://localhost:3535/abouthost/host-info', {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': `${localStorage.getItem('host-token')}`
-            }),
-            body: JSON.stringify({
-                body: this.state.postBody,
-                HostId: this.props.hostId
+        if (this.props.hostId) {
+            const res = await fetch('http://localhost:3535/abouthost/host-info', {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `${this.props.hostToken}`
+                }),
+                body: JSON.stringify({
+                    body: this.state.postBody,
+                    HostId: this.props.hostId
+                })
             })
-        })
-        await res.json()
-        this.initData()
+            await res.json()
+            this.initData()
+        } else {
+            const res = await fetch('http://localhost:3535/abouthost/host-info', {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('host-token')}`
+                }),
+                body: JSON.stringify({
+                    body: this.state.postBody,
+                    HostId: localStorage.getItem('host-id')
+                })
+            })
+            await res.json()
+            this.initData()
+        }
     }
 
     updateBio = async (e: any) => {
         e.preventDefault()
-        const res = await fetch(`http://localhost:3535/abouthost/edit-bio/${localStorage.getItem('host-id')}/${this.state.id}`, {
-            method: 'PUT',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': `${localStorage.getItem('host-token')}`
-            }),
-            body: JSON.stringify({
-                body: this.state.editBody
+        if (this.props.hostId) {
+            const res = await fetch(`http://localhost:3535/abouthost/edit-bio/${this.props.hostId}/${this.state.id}`, {
+                method: 'PUT',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `${this.props.hostToken}`
+                }),
+                body: JSON.stringify({
+                    body: this.state.editBody
+                })
             })
-        })
-        await res.json()
-        this.initData()
-        this.setState({ updateBody: false })
+            await res.json()
+            this.initData()
+            this.setState({ updateBody: false })
+
+        } else {
+            const res = await fetch(`http://localhost:3535/abouthost/edit-bio/${localStorage.getItem('host-id')}/${this.state.id}`, {
+                method: 'PUT',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('host-token')}`
+                }),
+                body: JSON.stringify({
+                    body: this.state.editBody
+                })
+            })
+            await res.json()
+            this.initData()
+            this.setState({ updateBody: false })
+        }
     }
 
     async componentDidMount() {
@@ -125,7 +154,6 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
         }
     }
 
-
     render() {
         return (
             <Grid container direction='column' justify='flex-start' className='about-section'>
@@ -135,7 +163,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
                     </Tooltip>
                     : <h4 className='bio-title-none'>Bio:</h4>}
 
-                <Box className="about-host" key={this.props.hostId}>
+                <Box className='about-host' key={this.props.hostId}>
                     {this.state?.info?.info && !this.state.updateBody ?
                         <Typography align='left' className='bio-text'>{this.state.info.info.body}</Typography>
                         :
@@ -146,13 +174,14 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
                                     fullWidth
                                     inputProps={{ maxLength: 500 }}
                                     multiline
+                                    aria-label='Update Bio'
                                     rowsMax={5}
                                     className='host-input'
                                     value={this.state.editBody}
                                     onChange={(e) => this.setState({ editBody: e.target.value })}
                                     endAdornment={<InputAdornment position='end'>
-                                        <Button 
-                                        color='primary' type='submit'>Submit</Button>
+                                        <Button
+                                            color='primary' type='submit'>Submit</Button>
                                     </InputAdornment>}
                                 />
                             </form> :
@@ -162,6 +191,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
                                     placeholder='Tell us about yourself!'
                                     className='host-input'
                                     multiline
+                                    aria-label='Post Bio'
                                     rowsMax={5}
                                     value={this.state.postBody}
                                     onChange={(e) => this.setState({ postBody: e.target.value })}

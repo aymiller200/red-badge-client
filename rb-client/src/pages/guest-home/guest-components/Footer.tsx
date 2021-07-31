@@ -7,9 +7,8 @@ class Footer extends React.Component{
     render(){
         return(
             <footer>
-                <Grid container direction='row' justify="center" alignItems='center' className='footer'>
+                <Grid container direction='row' justify="center" className='footer'>
                 <h4>Copyright © 2021 Ayanna Miller All Rights Reserved </h4>
-               
                 <h4> All photography on this page by Sara Collins (Instagram: @filmcowgirl) </h4>
             </Grid>
             </footer>
