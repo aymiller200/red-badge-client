@@ -145,7 +145,7 @@ class Details extends React.Component<DetailProps, CommentState>{
                                                         />      
                                             </Grid>
                                             : <Grid container alignContent='flex-start' justify='flex-start' className='reply-body'>
-                                                <h6>{message.body}</h6>
+                                                <h5>{message.body}</h5>
                                             </Grid>
                                         }
                                     </div>

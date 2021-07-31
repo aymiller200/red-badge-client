@@ -143,7 +143,9 @@ class Books extends React.Component<BooksProps, BooksState> {
                                             <hr />
                                             <Typography gutterBottom className='books-header'>Special notes: </Typography>
                                             <Paper>
-                                                <p className='notes'>{schedule?.notes}</p>
+                                                {schedule.notes ? 
+                                                <p className='notes'>{schedule.notes}</p>
+                                                 : <p className='no-notes notes'>You didn't leave any notes!</p>       }
                                             </Paper>
                                             <Grid container direction='row' justify='space-between'>
                                                 <Typography className='books-header'>{`People staying: ${schedule?.peopleStaying}`}</Typography>

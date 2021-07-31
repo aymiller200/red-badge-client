@@ -53,13 +53,12 @@
 }
 
 .host-bio-box{
-    border: 1px solid black;
     width: 80% !important;
     height: 20vh;
     word-wrap: break-word;
     overflow-y: scroll;
     margin-bottom: 15px;
-    box-shadow: 2px 2px 5px black;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.318);
 
     .host-bio-text{
         margin: 15px;

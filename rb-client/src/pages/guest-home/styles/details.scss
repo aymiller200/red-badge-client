@@ -62,12 +62,14 @@
                 background-color: rgba(170, 213, 248, 0.219) !important;
                 height: max-content !important;
 
-                h6 {
+                h5 {
                     margin-left: 10px;
                     margin: auto;
                     text-align: left;
                     word-wrap: break-word !important;
                     width: 60%;
+                    font-size: large;
+                    font-weight: normal;
                     padding: 20px
                 }
             }
@@ -81,7 +83,10 @@
                     margin-right: 10px;
                     margin: auto;
                     word-wrap: break-word !important;
-                    width: 60%
+                    width: 60%;
+                    font-size: medium;
+                    font-weight:normal;
+                    padding: 10px
                 }
 
                 .button-container {

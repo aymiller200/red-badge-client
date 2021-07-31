@@ -109,7 +109,9 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
                                     <CardContent>
                                         <Typography gutterBottom className='books-header'>Special notes: </Typography>
                                         <Paper>
-                                            <p className='notes'>{schedule?.notes}</p>
+                                            {schedule.notes ?
+                                                <p className='notes'>{schedule.notes}</p>
+                                                : <p className='no-notes notes'>They didn't leave any notes!</p>}
                                         </Paper>
                                         <Grid container direction='row' justify='space-between'>
                                             <Typography className='books-header'>{`People staying: ${schedule?.peopleStaying}`}</Typography>
@@ -147,10 +149,10 @@ class HostBooks extends React.Component<hostBooksProps, BooksState>{
                                         />
                                     </Route>
                                     : null}
-                         
-                        </Grid>
-        )
-    }): <h4>No one has booked with you yet!</h4>}
+
+                            </Grid>
+                        )
+                    }) : <h4>No one has booked with you yet!</h4>}
 
             </div >
         )

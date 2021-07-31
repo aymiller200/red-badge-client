@@ -89,7 +89,7 @@ class GuestLogin extends React.Component<GuestLoginProps, GuestLoginState> {
                                 value={this.state.password}
                                 onChange={(e) => { this.setState({ password: e.target.value }) }}
                                 style={{ margin: '15px', width: '30vw' }} />
-                            <Button type='submit' variant='contained' color='primary' className='submit-button'>Sign-in</Button>
+                            <Button type='submit' variant='outlined' color='primary' className='submit-button'>Sign-in</Button>
                         </Card>
                     </Grid>
                 </FormControl>

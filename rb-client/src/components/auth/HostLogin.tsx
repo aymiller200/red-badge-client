@@ -97,7 +97,7 @@ class HostLogin extends React.Component<HostLoginProps, HostLoginState> {
                                 value={this.state.password}
                                 onChange={(e) => { this.setState({ password: e.target.value }) }}
                                 style={{ margin: '15px', width: '30vw' }} />
-                            <Button type='submit' color='primary' variant='contained' className='submit-button'>Sign-in</Button>
+                            <Button type='submit' color='primary' variant='outlined' className='submit-button'>Sign-in</Button>
                         </Card>
                     </Grid>
                 </FormControl>

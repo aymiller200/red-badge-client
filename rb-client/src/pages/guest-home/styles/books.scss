@@ -19,7 +19,13 @@
     }
 
     .notes{
-        padding: 5px !important;
+        padding: 8px !important;
+        word-wrap: break-word;
+    }
+
+    .no-notes{
+        font-style: italic;
+        color:rgba(0, 0, 0, 0.308)
     }
 
     .content{
