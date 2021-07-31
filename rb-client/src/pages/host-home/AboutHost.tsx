@@ -77,7 +77,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
     postBio = async (e: any) => {
         e.preventDefault()
         if (this.props.hostId) {
-            const res = await fetch(`http://localhost:3535/abouthost/host-info`, {
+            const res = await fetch(`${APIURL}/abouthost/host-info`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ class AboutHost extends React.Component<AboutHostProps, AboutHostState>{
             await res.json()
             this.initData()
         } else {
-            const res = await fetch(`http://localhost:3535/abouthost/host-info`, {
+            const res = await fetch(`${APIURL}/abouthost/host-info`, {
                 method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
